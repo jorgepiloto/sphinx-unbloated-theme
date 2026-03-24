@@ -1,0 +1,14 @@
+{%- extends "layout.html" -%}
+
+{%- block extrahead %}
+  {{ super() }}
+  {# Root-relative base so all asset paths resolve correctly from any 404 URL #}
+  <base href="/">
+{%- endblock %}
+
+{%- block body %}
+<section class="not-found">
+  <h1>Error 404 - Page not found</h1>
+  <p>If you were expecting some content on this page, please <a href="{{ theme_github_url }}/issues">open an issue</a> on GitHub.</p>
+</section>
+{%- endblock %}

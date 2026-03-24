@@ -1,0 +1,40 @@
+# Build output
+doc/_build/
+dist/
+
+# Python
+*.egg-info/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Node
+package-lock.json
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Jupyter / nbsphinx
+.ipynb_checkpoints/
+*.ipynb
+
+# Testing / coverage
+.tox/
+.coverage
+htmlcov/
