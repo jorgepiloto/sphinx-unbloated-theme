@@ -36,7 +36,7 @@ dependencies = [
     "Sphinx>=9.0",
 ]
 
-[project.optional-dependencies]
+[dependency-groups]
 doc = [
   "jupyterlab==4.5.5",
   "jupytext==1.19.1",

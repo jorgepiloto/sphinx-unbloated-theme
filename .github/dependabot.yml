@@ -1,0 +1,41 @@
+version: 2
+updates:
+
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    cooldown:
+      default-days: 7
+      include:
+        - "*" # Include all dependencies in cooldown
+    labels:
+      - "dependencies:pyproject"
+    commit-message:
+      prefix: "build"
+    groups:
+      doc:
+        patterns:
+          - "jupyter*"
+          - "jupytext"
+          - "myst*"
+          - "nbsphinx"
+          - "nbconvert"
+          - "*sphinx*"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    cooldown:
+      default-days: 7
+      include:
+        - "*" # Include all dependencies in cooldown
+    labels:
+      - "dependencies:ci"
+    commit-message:
+      prefix: "build"
+    groups:
+      actions:
+        patterns:
+          - "*"

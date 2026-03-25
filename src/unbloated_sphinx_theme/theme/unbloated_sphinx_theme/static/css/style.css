@@ -79,7 +79,7 @@ html {
 body {
     min-height: calc(100vh - 2rem);
     max-width: 800px;
-    margin: 0 auto;
+    margin: 1rem auto;
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
@@ -212,7 +212,7 @@ nav {
     margin-bottom: 1rem;
     padding: 0 1rem;
 
-    /* Each <a> is the flex item, sized like Hugo's direct-child buttons */
+    /* Each <a> is the flex item, sized like direct-child buttons */
     & a {
         flex: 1 1 calc(33.3% - 1rem);
         text-decoration: none;
@@ -530,4 +530,10 @@ div.toctree-wrapper p.caption {
 
 section.not-found {
     flex: 1;
+}
+
+/* == Search page ============================================================ */
+
+#search-results > h2 {
+    display: none;
 }

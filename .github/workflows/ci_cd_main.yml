@@ -1,0 +1,75 @@
+name: main
+on:
+  push:
+    branches:
+      - main
+env:
+  PROJECT_NAME: 'unbloated-sphinx-theme'
+  DOCUMENTATION_CNAME: 'jorgemartinez.space/projects/unbloated-sphinx-theme'
+  MAIN_PYTHON_VERSION: '3.12'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+
+  doc-build:
+    name: "Doc build"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: "Checkout the project"
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: "Setup Python"
+        uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5.4.2
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+
+      - name: "Setup Quarto"
+        uses: quarto-dev/quarto-actions/setup@8a96df13519ee81fd526f2dfca5962811136661b # v2.2.0
+        with:
+          tinytex: true
+
+      - name: "Setup Pandoc"
+        run: |
+          sudo apt-get install -y pandoc
+
+      - name: "Install Tox"
+        run: |
+          uv tool install tox
+
+      - name: "Build documentation"
+        run: |
+          tox -e doc-links,doc-html
+
+      - name: "Upload documentation artifacts"
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: documentation-html
+          path: doc/_build/html
+
+  doc-deploy-dev:
+    name: "Doc deploy dev"
+    runs-on: ubuntu-latest
+    needs: doc-build
+    permissions:
+      contents: read
+    steps:
+      - name: "Download documentation artifacts"
+        uses: actions/download-artifact@95815c38cf2ff2164869cbab79da8d1f422bc89e # v4.2.1
+
+      - name: "Deploy documentation"
+        uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4.0.0
+        with:
+          personal_token: ${{ secrets.WEBSITE_DEPLOY_KEY }}
+          external_repository: jorgepiloto/website
+          publish_dir: documentation-html
+          publish_branch: gh-pages
+          destination_dir: projects/unbloated-sphinx-theme/version/dev
