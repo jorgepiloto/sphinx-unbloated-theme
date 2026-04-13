@@ -33,12 +33,12 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
 ]
 dependencies = [
-    "Sphinx>=9.0",
+    "Sphinx>=9.1.0",
 ]
 
 [dependency-groups]
 doc = [
-  "jupyterlab==4.5.5",
+  "jupyterlab==4.5.6",
   "jupytext==1.19.1",
   "matplotlib==3.10.8",
   "myst-parser==5.0.0",
