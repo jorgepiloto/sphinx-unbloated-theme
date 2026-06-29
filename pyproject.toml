@@ -38,8 +38,8 @@ dependencies = [
 
 [dependency-groups]
 doc = [
-  "jupyterlab==4.5.7",
-  "jupytext==1.19.3",
+  "jupyterlab==4.6.0",
+  "jupytext==1.19.4",
   "matplotlib==3.10.9",
   "myst-parser==5.1.0",
   "nbconvert==7.17.1",
