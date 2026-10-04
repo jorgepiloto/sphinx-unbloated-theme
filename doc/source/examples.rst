@@ -3,8 +3,8 @@
 Examples
 ########
 
-These examples cover the ISA atmospheric model, Monte Carlo estimation of π,
-and projectile motion with quadratic air drag.
+Run the ISA atmosphere, Monte Carlo π, and projectile motion examples below.
+Each script uses NumPy for calculations and Matplotlib for plots.
 
 .. nbgallery::
     :caption: Example Gallery

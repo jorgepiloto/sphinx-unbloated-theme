@@ -3,32 +3,30 @@
 Prerequisites
 #############
 
-Before installing the Sphinx Unbloated Theme, make sure your environment meets
-the following requirements.
+The theme requires Python 3.12 or later and Sphinx 9.0 or later.
 
 Python
 ------
 
-Python **3.12 or later** is required. You can check your version with:
+Check your Python version:
 
 .. code-block:: bash
 
    python --version
 
-If you need to install or upgrade Python, download the latest release from
+To install or upgrade Python, download a release that meets the requirement from
 `python.org <https://www.python.org/downloads/>`_.
 
 Sphinx
 ------
 
-Sphinx **9.0 or later** is required. If Sphinx is not yet installed, or you
-need to upgrade it, run:
+Install or upgrade Sphinx:
 
 .. code-block:: bash
 
    pip install --upgrade "Sphinx>=9.0"
 
-Confirm the installed version with:
+Check the installed version:
 
 .. code-block:: bash
 

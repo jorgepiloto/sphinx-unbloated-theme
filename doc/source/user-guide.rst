@@ -1,11 +1,11 @@
 .. _user-guide:
 
-User guide
+User Guide
 ##########
 
-This section covers every knob you can turn once the theme is installed. The
-theme is intentionally minimal — there are only a handful of options — so
-configuration is quick and the visual result is predictable.
+Configure the header, footer, and API templates in ``conf.py``. The layout
+page explains the navigation, and the kitchen sink shows how the theme
+renders reStructuredText.
 
 .. toctree::
    :hidden:

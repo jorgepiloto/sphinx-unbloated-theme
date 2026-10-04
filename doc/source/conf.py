@@ -9,11 +9,11 @@ import shutil
 import subprocess
 import sys
 
-# Load the local theme and version from src.
 import sphinx
 import sphinx.application
 from sphinx.util.display import status_iterator
 
+# Load the local theme and version from src.
 sys.path.insert(0, str(Path(__file__).parents[2] / "src"))
 
 from sphinx_unbloated_theme import __version__, get_autoapi_templates_dir
@@ -63,7 +63,7 @@ html_short_title = "Sphinx Unbloated Theme"
 html_baseurl = "https://jorgemartinez.space/projects/sphinx-unbloated-theme/version/stable/"
 
 html_theme_options = {
-    "site_description": "A minimal, clean Sphinx theme with a monospace aesthetic.",
+    "site_description": "A Sphinx theme with monospace text and black and white headers.",
     "footer_text": f"&copy; {datetime.now().year} Jorge Martinez. Built with the Sphinx Unbloated Theme.",
     "github_url": "https://github.com/jorgemartinez",
     "versions_url": f"https://{cname}/versions.json",

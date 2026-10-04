@@ -3,14 +3,14 @@
 Configuration
 #############
 
-Set the theme options in ``html_theme_options`` in your ``conf.py``.
+Set ``html_theme_options`` in your project's ``conf.py``.
 
-Available options
+Available Options
 -----------------
 
 ``site_description``
-    A short description displayed below the project title in the site header.
-    Defaults to an empty string (no description shown).
+    A short description below the project title in the header. The default
+    is an empty string, which hides the description.
 
     .. code-block:: python
 
@@ -19,8 +19,8 @@ Available options
        }
 
 ``footer_text``
-    Custom HTML string rendered inside the ``<footer>`` element.
-    Defaults to the Sphinx copyright string plus a "Built with Sphinx" notice.
+    HTML to show inside the ``<footer>`` element. By default, the footer
+    shows the Sphinx copyright string and a "Built with Sphinx" notice.
 
     .. code-block:: python
 
@@ -29,9 +29,9 @@ Available options
        }
 
 ``github_url``
-    URL of the project's GitHub repository. When set, a GitHub icon link is
-    shown in the header next to the other social icons.
-    Defaults to an empty string (icon not shown).
+    Your project's GitHub repository URL. Adds a GitHub icon link beside
+    the other social icons in the header. The default is an empty string,
+    which hides the icon.
 
     .. code-block:: python
 
@@ -40,9 +40,8 @@ Available options
        }
 
 ``linkedin_url``
-    URL of a LinkedIn profile or company page. When set, a LinkedIn icon link
-    is shown in the header.
-    Defaults to an empty string (icon not shown).
+    A LinkedIn profile or company page URL. Adds a LinkedIn icon link to
+    the header. The default is an empty string, which hides the icon.
 
     .. code-block:: python
 
@@ -51,9 +50,8 @@ Available options
        }
 
 ``youtube_url``
-    URL of a YouTube channel or playlist. When set, a YouTube icon link is
-    shown in the header.
-    Defaults to an empty string (icon not shown).
+    A YouTube channel or playlist URL. Adds a YouTube icon link to the
+    header. The default is an empty string, which hides the icon.
 
     .. code-block:: python
 
@@ -62,8 +60,8 @@ Available options
        }
 
 ``rss_url``
-    URL of an RSS feed. When set, an RSS icon link is shown in the header.
-    Defaults to an empty string (icon not shown).
+    An RSS feed URL. Adds an RSS icon link to the header. The default is
+    an empty string, which hides the icon.
 
     .. code-block:: python
 
@@ -72,9 +70,9 @@ Available options
        }
 
 ``sponsor_url``
-    URL of a sponsorship page (e.g. GitHub Sponsors, Open Collective).
-    When set, a heart-shield icon link is shown in the header.
-    Defaults to an empty string (icon not shown).
+    A sponsorship page URL, such as GitHub Sponsors or Open Collective.
+    Adds a heart-shield icon link to the header. The default is an empty
+    string, which hides the icon.
 
     .. code-block:: python
 
@@ -83,10 +81,10 @@ Available options
        }
 
 ``versions_url``
-    URL of a JSON file that lists the available documentation versions.
-    When set, a version-switcher drop-down is rendered in the header.
-    The JSON must be an array of objects with ``name`` and ``url`` keys.
-    Defaults to an empty string (drop-down not shown).
+    A JSON file URL listing the available documentation versions. Adds a
+    version dropdown to the header. The JSON must be an array of objects
+    with ``name`` and ``url`` keys. The default is an empty string, which
+    hides the dropdown.
 
     .. code-block:: python
 
@@ -103,7 +101,7 @@ Available options
          {"name": "v1.0",          "url": "https://my-site.com/version/v1.0/"}
        ]
 
-Full example
+Full Example
 ------------
 
 .. code-block:: python

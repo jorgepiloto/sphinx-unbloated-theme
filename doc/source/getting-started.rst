@@ -1,10 +1,10 @@
 .. _getting-started:
 
-Getting started
+Getting Started
 ###############
 
-This section walks you through everything you need to get the Sphinx Unbloated
-Theme up and running in your project.
+Install the theme and select it in your Sphinx configuration. Check the
+prerequisites before installing.
 
 .. toctree::
    :hidden:

@@ -3,18 +3,11 @@
 About
 #####
 
-The Sphinx Unbloated Theme is a minimal, clean HTML theme for
-`Sphinx <https://www.sphinx-doc.org/>`_. It is built on Sphinx's ``basic``
-theme — the only dependency — and uses vanilla CSS with no third-party
-frameworks or bundlers.
+The Sphinx Unbloated Theme is an HTML theme for
+`Sphinx <https://www.sphinx-doc.org/>`_. It inherits from Sphinx's ``basic``
+theme and uses vanilla CSS and JavaScript. Sphinx is its only runtime
+dependency.
 
-Design goals
-------------
-
-- **No bloat.** No Bootstrap, no Tailwind, no JavaScript frameworks.
-- **Readable.** Monospace typography and generous whitespace keep the focus
-  on the content.
-- **Hackable.** A small, well-organised CSS file is easy to override or
-  extend in your own project.
-- **Fast.** Without heavy assets, pages load quickly and work well on slow
-  connections.
+Pages use monospace typography and space between sections to keep the text
+readable. You can override or extend the theme's small stylesheet in your
+project.

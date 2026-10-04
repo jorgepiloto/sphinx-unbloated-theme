@@ -3,24 +3,23 @@
 Layout
 ######
 
-The theme renders every page with four structural HTML elements that mirror
-the layout used on `jorgemartinez.space <https://jorgemartinez.space>`_:
+The page layout follows `jorgemartinez.space <https://jorgemartinez.space>`_.
+It uses four HTML elements:
 
 ``<header>``
-    Black background, white text. Displays the project name (``project`` from
-    ``conf.py``) and, optionally, the ``site_description`` theme option.
+    Shows the project name (``project`` in ``conf.py``) in white on black.
+    Set ``site_description`` to add a description below it.
 
 ``<nav>``
     Monospace buttons link to the top-level sections and the current section's
     child pages. They show white text on black when hovered or active.
 
 ``<main>``
-    The full-width content area. No sidebar is rendered; the document takes all
-    available horizontal space (up to 800 px).
+    Contains the document and uses the available width, up to 800 px.
 
 ``<footer>``
-    Black background, white text. Renders the value of the ``footer_text``
-    theme option, or a default copyright + Sphinx notice.
+    Shows ``footer_text`` in white on black. The default is the copyright
+    text and a Sphinx notice.
 
 Page Navigation
 ---------------
@@ -31,12 +30,11 @@ Hovering or focusing it with the keyboard switches to white text on black.
 On short pages, the content area expands to keep the button just above the
 footer.
 
-No Sidebar
-----------
+Table of Contents
+-----------------
 
-The ``basic`` theme's sidebar is suppressed entirely. If you need a table of
-contents you can add it inline in your ``.rst`` files using the ``.. contents::``
-directive:
+The theme hides the ``basic`` theme's sidebar. To add a table of contents
+inside a page, use the ``.. contents::`` directive in your ``.rst`` file:
 
 .. code-block:: rst
 

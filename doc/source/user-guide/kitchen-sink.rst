@@ -1,28 +1,28 @@
 .. _kitchen-sink:
 
-Kitchen sink
+Kitchen Sink
 ############
 
-This page exercises every reStructuredText element supported by the theme so
-you can verify at a glance that typography, spacing, and colours look correct.
+Use these reStructuredText samples to check the theme's typography, spacing,
+and colors.
 
 Typography
 ----------
 
-Normal paragraph text set in the theme's monospace typeface. **Bold text**,
-*italic text*, ``inline code``, and `hyperlinks <https://www.sphinx-doc.org/>`_
-all appear here.
+Paragraphs use the theme's monospace typeface. This paragraph includes
+**bold text**, *italic text*, ``inline code``, and a
+`hyperlink <https://www.sphinx-doc.org/>`_.
 
 Headings
 --------
 
-Heading level 2 (h2)
+Heading Level 3 (h3)
 ~~~~~~~~~~~~~~~~~~~~~
 
-Heading level 3 (h3)
+Heading Level 4 (h4)
 ^^^^^^^^^^^^^^^^^^^^^
 
-Heading level 4 (h4)
+Heading Level 5 (h5)
 """""""""""""""""""""
 
 Lists
@@ -32,8 +32,8 @@ Unordered
 ~~~~~~~~~
 
 - First item in an unordered list.
-- Second item, with a bit more text to check line wrapping at narrower
-  viewport widths.
+- Second item, with enough text to check how the list wraps on a narrow
+  screen.
 - Third item.
 
 Ordered
@@ -43,15 +43,15 @@ Ordered
 2. Second step.
 3. Third step.
 
-Definition list
+Definition List
 ~~~~~~~~~~~~~~~
 
 term
     Definition of the term.
 
 another term
-    Definition of another term, possibly spanning multiple lines to verify
-    that continuation indentation is rendered correctly.
+    This definition spans multiple lines so you can check the indentation
+    of wrapped text.
 
 Code
 ----
@@ -73,22 +73,20 @@ Admonitions
 
 .. note::
 
-   This is a **note** admonition. Use it for supplementary information that
-   the reader should be aware of.
+   Use a note for information that supports the main text.
 
 .. warning::
 
-   This is a **warning** admonition. Use it to flag potentially dangerous or
-   irreversible actions.
+   Use a warning for actions that could cause harm or can't be undone.
 
 .. tip::
 
-   This is a **tip** admonition. Use it to share best-practice advice.
+   Use a tip for advice on completing a task.
 
 Tables
 ------
 
-.. list-table:: Sample data table
+.. list-table:: Sample Data Table
    :header-rows: 1
    :widths: 20 40 40
 
@@ -105,21 +103,21 @@ Tables
 Blockquote
 ----------
 
-   A blockquote is an indented block of text used to highlight a passage or
-   cited material. It should stand out visually from surrounding paragraphs.
+   Indent a passage to render it as a blockquote. The indentation separates
+   it from the surrounding paragraphs.
 
 Mathematics
 -----------
 
 Inline math: the area of a circle is :math:`A = \pi r^2`.
 
-Display math — the quadratic formula:
+Display math: the quadratic formula.
 
 .. math::
 
    x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
 
-A multi-line equation — Euler's identity and the Gaussian integral:
+A multiline equation with Euler's identity and the Gaussian integral:
 
 .. math::
 
