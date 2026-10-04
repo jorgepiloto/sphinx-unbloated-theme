@@ -10,6 +10,9 @@ grouped summary tabs and member details. Use numpydoc to render NumPy
 docstrings in the same API layout. See :ref:`getting-started` for installation
 and :ref:`configuration` for theme options and AutoAPI setup.
 
+.. figure:: _static/screenshots/theme-preview.png
+    :align: center
+
 .. toctree::
    :hidden:
    :maxdepth: 3
