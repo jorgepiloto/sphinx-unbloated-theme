@@ -1,14 +1,13 @@
-# This file is required by the the action 'https://github.com/actions/labeler'
-# and used in the '.github/workflows/ci_cd_pr.yml' workflow
+# Label rules for https://github.com/actions/labeler
 
-# -- Labels based on PR title ------------------------------------------------
+# Labels from branch names
 'fix':
   - head-branch: ['fix']
 
 'enhancement':
   - head-branch: ['feat']
 
-# -- Documentation labels ----------------------------------------------------
+# Documentation labels
 'docs':
   - all:
       - changed-files:
@@ -26,7 +25,7 @@
       - changed-files:
           - any-glob-to-any-file: ['examples/**/*.py', 'doc/source/examples.rst']
 
-## -- Other labels ------------------------------------------------------------
+# Other labels
 'style:code':
   - any:
       - changed-files:
@@ -47,9 +46,8 @@
       - changed-files:
           - any-glob-to-any-file: ['tests/**']
 
-# HACK: the following labels are declared with the only purpose of avoiding the
-# GitHub labeler bot to remove those. This is a known issue reported in the
-# official action/labeler repo https://github.com/actions/labeler/issues/763
+# Keep these labels when the labeler updates a pull request.
+# See https://github.com/actions/labeler/issues/763.
 
 'ci:skip':
   - all:

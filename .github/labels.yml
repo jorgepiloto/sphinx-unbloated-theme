@@ -1,7 +1,7 @@
-# The labels declared in this file are the ones available
+# Project labels:
 # https://github.com/jorgepiloto/sphinx-unbloated-theme/labels
 
-# -- Defects, glitches, and vulnerabilities labels ---------------------------
+# Defects, glitches, and vulnerabilities labels
 
 - name: 'bug'
   description: Defects or glitches reported by users or developers
@@ -15,7 +15,7 @@
   description: Pull requests related to resolving problems or errors
   color: d42a34
 
-# -- Style labels ------------------------------------------------------------
+# Style labels
 
 - name: 'style'
   description: Improvements related to general project style
@@ -37,7 +37,7 @@
   description: Skip style runs in CI/CD
   color: dcbeff
 
-# -- Tests labels ------------------------------------------------------------
+# Tests labels
 
 - name: 'tests'
   description: Related with improvements of the test suite
@@ -47,7 +47,7 @@
   description: Skip tests runs in CI/CD
   color: ffd8b1
 
-# -- Documentation labels ----------------------------------------------------
+# Documentation labels
 
 - name: 'docs'
   description: Issues related to documentation
@@ -73,7 +73,7 @@
   description: Skip documentation runs in CI/CD
   color: 0677ba
 
-# -- Dependencies labels -----------------------------------------------------
+# Dependencies labels
 
 - name: 'dependencies'
   description: Related with project dependencies
@@ -87,7 +87,7 @@
   description: Related with pipelines dependencies
   color: fabed4
 
-# -- CI/CD labels ------------------------------------------------------------
+# CI/CD labels
 
 - name: 'ci'
   description: Pipelines maintenance related
@@ -97,7 +97,7 @@
   description: Skip CI/CD runs
   color: a9a9a9
 
-# -- Other labels ------------------------------------------------------------
+# Other labels
 
 - name: 'release'
   description: Anything related to an incoming release

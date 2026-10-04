@@ -1,17 +1,16 @@
-# # Mandelbrot set
+# # Mandelbrot Set
 #
-# The **Mandelbrot set** is the set of complex numbers ``c`` for which the
-# iteration ``zₙ₊₁ = zₙ² + c`` (starting from ``z₀ = 0``) does not diverge.
-# Points that escape to infinity are coloured by *how quickly* they escape,
-# producing the iconic fractal boundary.
+# The Mandelbrot set contains complex numbers ``c`` for which the iteration
+# ``zₙ₊₁ = zₙ² + c``, starting from ``z₀ = 0``, does not diverge.
+# Color escaping points by their escape count to show the fractal boundary.
 #
-# The computation is fully vectorised using NumPy complex arrays.
-# Only NumPy and Matplotlib are needed.
+# Compute the iterations with NumPy complex arrays and plot them with
+# Matplotlib.
 
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ## Grid definition
+# ## Grid Definition
 #
 # Build a complex-valued array whose real and imaginary parts sample the
 # region of interest in the complex plane.
@@ -29,9 +28,8 @@ C = x[np.newaxis, :] + 1j * y[:, np.newaxis]
 
 # ## Iteration
 #
-# Track the escape iteration count for each point.  The *smooth colouring*
-# trick stores a fractional iteration count that removes the banding caused
-# by integer thresholds.
+# Track the escape count for each point. Use fractional counts for smooth
+# coloring to avoid bands from integer thresholds.
 
 Z       = np.zeros_like(C)
 counts  = np.zeros(C.shape, dtype=float)
@@ -41,17 +39,16 @@ for i in range(MAX_ITER):
     mask      = ~escaped
     Z[mask]   = Z[mask] ** 2 + C[mask]
     newly_escaped = mask & (np.abs(Z) > ESCAPE_RADIUS)
-    # Smooth colouring: fractional escape count
+    # Use a fractional escape count for smooth coloring.
     counts[newly_escaped] = i + 1 - np.log2(np.log2(np.abs(Z[newly_escaped])))
     escaped |= newly_escaped
 
-# Points that never escaped remain at 0
+# Leave points that did not escape within MAX_ITER at 0.
 counts[~escaped] = 0.0
 
-# ## Zoom region (Seahorse Valley)
+# ## Zoom into Seahorse Valley
 #
-# A second render of the famous "Seahorse Valley" detail reveals the
-# self-similar structure at deeper zoom levels.
+# Zoom into Seahorse Valley to show its self-similar structure.
 
 x2 = np.linspace(-0.76, -0.73, WIDTH)
 y2 = np.linspace(0.10,  0.14,  HEIGHT)
@@ -73,7 +70,7 @@ counts2[~escaped2] = 0.0
 
 fig, (ax_full, ax_zoom) = plt.subplots(1, 2, figsize=(13, 5))
 fig.suptitle("Mandelbrot set", fontsize=14, fontweight="bold")
-# --- full view ---
+# Full view.
 ax_full.imshow(counts, origin="lower", extent=[x_min, x_max, y_min, y_max],
                cmap="inferno", interpolation="bilinear")
 ax_full.set_title("Full view")
@@ -82,7 +79,7 @@ ax_full.set_ylabel("Im(c)")
 rect_x = [x2[0], x2[-1], x2[-1], x2[0], x2[0]]
 rect_y = [y2[0], y2[0], y2[-1], y2[-1], y2[0]]
 ax_full.plot(rect_x, rect_y, "w-", linewidth=1.2)
-# --- zoom ---
+# Zoom.
 ax_zoom.imshow(counts2, origin="lower", extent=[x2[0], x2[-1], y2[0], y2[-1]],
                cmap="inferno", interpolation="bilinear")
 ax_zoom.set_title("Seahorse Valley (zoom)")

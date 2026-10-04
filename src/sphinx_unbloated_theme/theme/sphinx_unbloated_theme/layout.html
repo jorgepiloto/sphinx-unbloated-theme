@@ -1,6 +1,6 @@
 {%- extends "basic/layout.html" -%}
 
-{# ── <head> additions ───────────────────────────────────────────────────── #}
+{# Add metadata to the page head. #}
 {%- block extrahead %}
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="preload" href="{{ pathto('_static/fonts/source-code-pro-normal.woff2', 1) }}" as="font" type="font/woff2" crossorigin>
@@ -8,7 +8,7 @@
   {{ super() }}
 {%- endblock %}
 
-{# ── Custom <header> ────────────────────────────────────────────────────── #}
+{# Site header #}
 {%- block header %}
 <header>
   <h1 class="title">{{ project }}</h1>
@@ -62,7 +62,7 @@
 </header>
 {%- endblock %}
 
-{# ── Navigation bar using top-level toctree entries ──────────────────────── #}
+{# Navigation links from the top-level toctree #}
 {%- block relbar1 %}
 <nav>
   {%- for label, url, is_active in nav_links %}
@@ -72,20 +72,17 @@
 {%- endblock %}
 {%- block relbar2 %}{% endblock %}
 
-{# ── Suppress sidebar ────────────────────────────────────────────────────── #}
+{# Leave the sidebar blocks empty. #}
 {%- block sidebar1 %}{% endblock %}
 {%- block sidebar2 %}{% endblock %}
 
-{# ── Main document area (no sidebar, full-width) ─────────────────────────── #}
+{# Page content #}
 {%- block document %}
 <main>
   {#
-    Ancestor breadcrumb levels — rendered before the current page body so that
-    each level's title + subnav appears above the current page's <h1>.
-    Example for user-guide/configuration:
-      [User Guide ↗]
-      [Config* | Layout | Typography]
-      <h1>Configuration</h1>   ← comes from {%- block body %}
+    Render the top-level section's title and child links before the page body.
+    On user-guide/configuration, User Guide and its child links appear
+    above the Configuration heading.
   #}
   {%- for level in breadcrumb_levels %}
   <p class="nav-breadcrumb-title"><a href="{{ level.url }}">{{ level.title }}</a></p>
@@ -97,12 +94,8 @@
   {%- endfor %}
 
   {#
-    Current page's own children subnav — rendered here so it exists in the DOM,
-    then JS moves it immediately after the page <h1>.
-    Example for user-guide (section page):
-      <h1>User Guide</h1>
-      [Configuration | Layout | Typography]   ← moved here by JS
-      <content>
+    Render the current page's child links here. JavaScript moves them after
+    the first h1, so a section page shows its child links below its title.
   #}
   {%- if subnav_links %}
   <nav class="subnav subnav-current">
@@ -153,7 +146,7 @@
 {%- endif %}
 {%- endblock %}
 
-{# ── Custom <footer> ────────────────────────────────────────────────────── #}
+{# Site footer #}
 {%- block footer %}
 <footer>
   {%- if theme_footer_text %}

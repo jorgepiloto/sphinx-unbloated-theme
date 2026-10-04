@@ -2,7 +2,7 @@
 
 {%- block extrahead %}
   {{ super() }}
-  {# Root-relative base so all asset paths resolve correctly from any 404 URL #}
+  {# Resolve asset paths from the site root when the requested URL is missing. #}
   <base href="/">
 {%- endblock %}
 

@@ -1,22 +1,22 @@
-# # Heat equation finite differences
+# # Heat Equation with Finite Differences
 #
-# The **1-D heat equation** describes how temperature diffuses through a
+# The 1-D heat equation describes how temperature diffuses through a
 # material over time:
 #
 # $$\frac{\partial T}{\partial t} = \alpha \frac{\partial^2 T}{\partial x^2}$$
 #
 # where ``α`` is the thermal diffusivity (m²/s). This example solves the
 # equation on a finite rod using an explicit Euler finite-difference scheme
-# and visualises the temperature profile evolving from a sharp initial spike.
+# and plots how an initial temperature spike diffuses over time.
 #
-# Only NumPy and Matplotlib are needed.
+# This example uses NumPy and Matplotlib.
 
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ## Domain and numerical parameters
+# ## Domain and Numerical Parameters
 #
-# The explicit scheme is stable when the Courant–Friedrichs–Lewy (CFL)
+# The explicit scheme is stable when the Courant-Friedrichs-Lewy (CFL)
 # condition ``r = α·Δt/Δx² ≤ 0.5`` is satisfied.
 
 L      = 1.0       # rod length, m
@@ -32,15 +32,15 @@ Nt   = int(t_end / dt)
 
 x = np.linspace(0, L, Nx)
 
-# ## Initial condition
+# ## Initial Condition
 #
-# A Gaussian hot-spot centred at the midpoint of the rod.
+# Start with a Gaussian temperature profile centered at the rod midpoint.
 
 T = np.exp(-200 * (x - 0.5)**2) * 100.0   # °C
 T[0]  = T_ends
 T[-1] = T_ends
 
-# ## Time integration
+# ## Time Integration
 #
 # Explicit Euler: ``T[i,n+1] = T[i,n] + r*(T[i+1,n] - 2*T[i,n] + T[i-1,n])``.
 # Snapshots are saved at fixed intervals for plotting.
@@ -66,7 +66,7 @@ for n in range(Nt):
 # ## Plotting
 #
 # Left panel: temperature profiles at each saved time. Right panel: heatmap
-# showing the full space-time evolution (sub-sampled for performance).
+# showing the temperature over time, subsampled to limit the array size.
 
 subsample   = max(1, Nt // 300)
 T_history   = np.empty((Nt // subsample + 1, Nx))
@@ -86,7 +86,7 @@ for n in range(Nt):
 
 fig, (ax_prof, ax_heat) = plt.subplots(1, 2, figsize=(12, 5))
 fig.suptitle("1-D heat equation — diffusion of a Gaussian hot-spot", fontsize=14, fontweight="bold")
-# --- profiles panel ---
+# Profiles panel.
 cmap_lines = plt.cm.YlOrRd
 n_snaps    = len(save_times)
 for idx, ts in enumerate(save_times):
@@ -98,7 +98,7 @@ ax_prof.set_ylabel("Temperature (°C)")
 ax_prof.set_title("Temperature profiles")
 ax_prof.legend(fontsize=8)
 ax_prof.grid(True, linestyle="--", alpha=0.5)
-# --- heatmap panel ---
+# Heatmap panel.
 t_axis = np.linspace(0, t_end, T_history.shape[0])
 im = ax_heat.imshow(T_history, origin="lower", aspect="auto",
                     extent=[0, 100, 0, t_end],
@@ -110,7 +110,7 @@ plt.colorbar(im, ax=ax_heat, label="Temperature (°C)")
 plt.tight_layout()
 plt.show()
 
-# ## Summary
+# ## Grid and Temperature Statistics
 
 print(f"Grid points   : {Nx}")
 print(f"Time step dt  : {dt:.4f} s  (CFL r = {r})")

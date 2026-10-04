@@ -1,23 +1,23 @@
-# # Double pendulum simulation
+# # Double Pendulum Simulation
 #
-# The **double pendulum** is the canonical example of a chaotic mechanical
-# system. Two pendulum bobs are connected in series; their motion is governed
-# by a coupled pair of nonlinear ODEs derived from the Lagrangian. Even small
-# differences in initial conditions lead to exponentially diverging trajectories.
+# A double pendulum has two bobs connected in series. A coupled pair of
+# nonlinear ordinary differential equations derived from the Lagrangian
+# describes their motion. In chaotic motion, small differences in initial
+# conditions lead to exponentially diverging trajectories.
 #
-# The equations of motion are integrated with a hand-written 4th-order
-# Runge-Kutta scheme. Only NumPy and Matplotlib are needed.
+# Integrate the equations with a fourth-order Runge-Kutta method.
+# This example uses NumPy and Matplotlib.
 
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ## System parameters
+# ## System Parameters
 
 L1, L2 = 1.0, 1.0    # rod lengths, m
 m1, m2 = 1.0, 1.0    # bob masses, kg
 g       = 9.80665     # gravitational acceleration, m/s²
 
-# ## Equations of motion
+# ## Equations of Motion
 #
 # State vector: ``[θ₁, ω₁, θ₂, ω₂]`` where θ are angles from the vertical
 # and ω = dθ/dt are angular velocities.
@@ -54,13 +54,13 @@ def rk4_integrate(state0, dt, n_steps):
 # ## Simulation
 #
 # Integrate two trajectories starting from almost identical initial conditions
-# to visualise sensitivity to initial conditions (the hallmark of chaos).
+# to compare their sensitivity to initial conditions.
 
 dt      = 0.005   # time step, s
 T_total = 25.0    # total simulation time, s
 n_steps = int(T_total / dt)
 
-eps = 1e-6   # tiny perturbation in θ₁
+eps = 1e-6   # Perturbation in θ₁, rad.
 state_A = np.array([np.pi / 2, 0.0, np.pi / 2, 0.0])
 state_B = state_A + np.array([eps, 0.0, 0.0, 0.0])
 
@@ -85,7 +85,7 @@ separation = np.sqrt((traj_A[:, 0] - traj_B[:, 0])**2 +
 
 fig, axes = plt.subplots(1, 3, figsize=(14, 5))
 fig.suptitle("Double pendulum — chaotic dynamics", fontsize=14, fontweight="bold")
-# --- Cartesian trace ---
+# Cartesian trace.
 axes[0].plot(x2, y2, linewidth=0.6, color="tab:blue", alpha=0.8)
 axes[0].plot(x2[0], y2[0], "go", markersize=7, label="start")
 axes[0].plot(x2[-1], y2[-1], "rs", markersize=7, label="end")
@@ -95,13 +95,13 @@ axes[0].set_ylabel("y (m)")
 axes[0].set_title("Trace of lower bob")
 axes[0].legend(fontsize=8)
 axes[0].grid(True, linestyle="--", alpha=0.4)
-# --- Phase portrait ---
+# Phase portrait.
 axes[1].plot(traj_A[:, 0], traj_A[:, 1], linewidth=0.5, color="tab:purple", alpha=0.7)
 axes[1].set_xlabel("θ₁ (rad)")
 axes[1].set_ylabel("ω₁ (rad/s)")
 axes[1].set_title("Phase portrait — upper bob")
 axes[1].grid(True, linestyle="--", alpha=0.4)
-# --- Sensitivity to initial conditions ---
+# Sensitivity to initial conditions.
 valid = separation > 0
 axes[2].semilogy(time[valid], separation[valid], color="tab:red", linewidth=1.4)
 axes[2].set_xlabel("Time (s)")
@@ -111,7 +111,7 @@ axes[2].grid(True, linestyle="--", alpha=0.4)
 plt.tight_layout()
 plt.show()
 
-# ## Energy conservation check
+# ## Energy Conservation Check
 
 KE = 0.5*(m1+m2)*L1**2*traj_A[:,1]**2 + 0.5*m2*L2**2*traj_A[:,3]**2 \
    + m2*L1*L2*traj_A[:,1]*traj_A[:,3]*np.cos(traj_A[:,0]-traj_A[:,2])

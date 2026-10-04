@@ -1,22 +1,21 @@
-# # Monte Carlo estimation of π
+# # Monte Carlo Estimation of π
 #
-# The **Monte Carlo method** estimates π by exploiting the ratio between the
-# area of a unit circle (π) and the area of the square that contains it (4).
-# Random points are drawn uniformly from the square; the fraction that land
-# inside the circle converges to π/4 as the sample size grows.
+# Estimate π from random points in a square of area 4 that contains a unit
+# circle of area π. Draw points uniformly from the square. The fraction inside
+# the circle approaches π/4 as the sample size grows.
 #
-# Only NumPy and Matplotlib are needed.
+# This example uses NumPy and Matplotlib.
 
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ## Simulation setup
+# ## Simulation Setup
 
 rng = np.random.default_rng(seed=42)
 
 N = 50_000  # total number of random points
 
-# ## Running the simulation
+# ## Run the Simulation
 #
 # Sample (x, y) pairs uniformly in [−1, 1]² and classify each point as
 # inside or outside the unit circle.
@@ -28,9 +27,9 @@ inside = x**2 + y**2 <= 1.0
 pi_estimate = 4 * inside.sum() / N
 print(f"π estimate after {N:,} samples: {pi_estimate:.6f}  (error: {abs(pi_estimate - np.pi):.2e})")
 
-# ## Convergence of the estimate
+# ## Convergence of the Estimate
 #
-# Watch the running estimate converge to π as the number of samples grows.
+# Compute the running estimate as the number of samples grows.
 
 sample_counts = np.arange(1, N + 1)
 running_pi = 4 * np.cumsum(inside) / sample_counts
@@ -42,7 +41,7 @@ running_pi = 4 * np.cumsum(inside) / sample_counts
 
 fig, (ax_scatter, ax_conv) = plt.subplots(1, 2, figsize=(12, 5))
 fig.suptitle("Monte Carlo estimation of π", fontsize=14, fontweight="bold")
-# --- Scatter plot (subsample for readability) ---
+# Scatter plot (subsample for readability).
 n_scatter = 5_000
 ax_scatter.scatter(x[:n_scatter][inside[:n_scatter]], y[:n_scatter][inside[:n_scatter]],
                    s=0.8, color="tab:blue", alpha=0.5, label="Inside circle")
@@ -56,7 +55,7 @@ ax_scatter.set_xlabel("x")
 ax_scatter.set_ylabel("y")
 ax_scatter.legend(loc="lower right", markerscale=6, fontsize=8)
 ax_scatter.grid(True, linestyle="--", alpha=0.4)
-# --- Convergence plot ---
+# Convergence plot.
 ax_conv.semilogx(sample_counts, running_pi, color="tab:blue", linewidth=1.2,
                  label="Running estimate")
 ax_conv.axhline(np.pi, color="black", linewidth=1.0, linestyle="--", label="True π")
@@ -68,9 +67,9 @@ ax_conv.grid(True, linestyle="--", alpha=0.4)
 plt.tight_layout()
 plt.show()
 
-# ## Sea-level reference values
+# ## Estimate Error
 #
-# Final estimate and its error for quick verification.
+# Compare the final estimate with NumPy's value of π.
 
 print(f"True π              : {np.pi:.6f}")
 print(f"Estimated π         : {pi_estimate:.6f}")

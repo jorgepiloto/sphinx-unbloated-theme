@@ -1,4 +1,4 @@
-"""Sphinx documentation configuration file."""
+"""Configure the documentation build."""
 
 from datetime import datetime
 from pathlib import Path
@@ -9,7 +9,7 @@ import shutil
 import subprocess
 import sys
 
-# Make the package importable for autodoc without a prior install step
+# Import the package from src so autodoc can run without installing it.
 import sphinx
 import sphinx.application
 from sphinx.util.display import status_iterator
@@ -42,7 +42,7 @@ intersphinx_mapping = {
     "sphinx": ("https://www.sphinx-doc.org/en/master", None),
 }
 
-# autodoc settings
+# Autodoc settings
 autodoc_default_options = {
     "members": True,
     "undoc-members": False,
@@ -66,13 +66,13 @@ html_theme_options = {
 master_doc = "index"
 exclude_patterns = ["_build", "conf.py"]
 
-# Generate a 404 page from the theme template
+# Build the 404 page from the theme template.
 html_additional_pages = {"404": "404.html"}
 
 # Examples to exclude from the gallery
 exclude_examples = []
 
-# The suffix(es) of source filenames
+# Source file extensions
 source_suffix = {
     ".rst": "restructuredtext",
     ".mystnb": "jupyter_notebook",
@@ -80,7 +80,7 @@ source_suffix = {
     ".py": "jupyter_notebook",
 }
 
-# Configure examples
+# Notebook examples
 nbsphinx_execute = "always"
 nbsphinx_custom_formats = {
     ".mystnb": ["jupytext.reads", {"fmt": "mystnb"}],
@@ -88,7 +88,7 @@ nbsphinx_custom_formats = {
 }
 nbsphinx_prompt_width = ""
 
-# Download buttons shown at the top of every notebook example page
+# Add download buttons after each notebook example's title.
 _cname = os.environ.get("CNAME", "localhost")
 _cname_pref = f"https://{_cname}/version/{version}"
 
@@ -119,14 +119,14 @@ nbsphinx_prolog = """
 
 def copy_examples_to_output_dir(app: sphinx.application.Sphinx, exception: Exception):
     """
-    Copy the examples directory to the output directory of the documentation.
+    Copy example scripts to the documentation output directory.
 
     Parameters
     ----------
     app : sphinx.application.Sphinx
-        Sphinx application instance containing the all the doc build configuration.
+        Sphinx application for this build.
     exception : Exception
-        Exception encountered during the building of the documentation.
+        Build exception, or None if the build succeeded. Unused by this hook.
 
     """
     OUTPUT_EXAMPLES = pathlib.Path(app.outdir) / "examples"
@@ -150,19 +150,18 @@ def copy_examples_to_output_dir(app: sphinx.application.Sphinx, exception: Excep
 
 def copy_examples_files_to_source_dir(app: sphinx.application.Sphinx, config):
     """
-    Copy the examples directory to the source directory of the documentation.
+    Copy example scripts into the documentation source directory.
 
-    This hook is connected to the ``config-inited`` event so that the files
-    are present before Sphinx enumerates source files (``find_files`` is
-    called in ``_post_init_env``, which runs after ``config-inited`` but
-    before ``builder-inited``).
+    Use ``config-inited`` so Sphinx can find the copied files. Sphinx calls
+    ``find_files`` in ``_post_init_env`` after ``config-inited`` and before
+    ``builder-inited``.
 
     Parameters
     ----------
     app : sphinx.application.Sphinx
-        Sphinx application instance containing the all the doc build configuration.
+        Sphinx application for this build.
     config : sphinx.config.Config
-        Sphinx configuration object (unused, required by the event signature).
+        Build configuration. Unused, but required by the event signature.
 
     """
     SOURCE_EXAMPLES = pathlib.Path(app.srcdir) / "examples"
@@ -179,14 +178,14 @@ def copy_examples_files_to_source_dir(app: sphinx.application.Sphinx, config):
 
 def remove_examples_from_source_dir(app: sphinx.application.Sphinx, exception: Exception):
     """
-    Remove the example files from the documentation source directory.
+    Remove copied examples from the documentation source directory.
 
     Parameters
     ----------
     app : sphinx.application.Sphinx
-        Sphinx application instance containing the all the doc build configuration.
+        Sphinx application for this build.
     exception : Exception
-        Exception encountered during the building of the documentation.
+        Build exception, or None if the build succeeded. Unused by this hook.
 
     """
     EXAMPLES_DIRECTORY = pathlib.Path(app.srcdir) / "examples"
@@ -199,15 +198,15 @@ def render_examples_as_pdf(app: sphinx.application.Sphinx, exception: Exception)
     """
     Render notebook examples as PDF files using Quarto.
 
-    Quarto needs to be installed in the system to render the PDF files. See
+    Install Quarto to render the PDFs. See
     https://quarto.org/docs/get-started/.
 
     Parameters
     ----------
     app : sphinx.application.Sphinx
-        Sphinx application instance containing the all the doc build configuration.
+        Sphinx application for this build.
     exception : Exception
-        Exception encountered during the building of the documentation.
+        Build exception, or None if the build succeeded. Unused by this hook.
 
     """
     try:
@@ -246,18 +245,16 @@ def render_examples_as_pdf(app: sphinx.application.Sphinx, exception: Exception)
 
 def setup(app: sphinx.application.Sphinx):
     """
-    Run different hook functions during the documentation build.
+    Register the example copy, cleanup, and PDF rendering hooks.
 
     Parameters
     ----------
     app : sphinx.application.Sphinx
-        Sphinx application instance containing the all the doc build configuration.
+        Sphinx application for this build.
 
     """
-    # Examples are kept in the repo root ``examples/`` directory. They are copied
-    # into ``doc/source/examples/`` before Sphinx reads them (it requires all
-    # source files to live under the source directory), and removed again once the
-    # build finishes so they are not permanently duplicated.
+    # Sphinx reads files from its source directory. Copy scripts from examples/
+    # to doc/source/examples/ before reading, then remove the copies after building.
     app.connect("config-inited", copy_examples_files_to_source_dir)
     app.connect("build-finished", remove_examples_from_source_dir)
     app.connect("build-finished", copy_examples_to_output_dir)

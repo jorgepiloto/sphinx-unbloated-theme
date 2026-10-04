@@ -1,4 +1,4 @@
-"""Sphinx Unbloated Theme, a minimal, clean Sphinx theme."""
+"""Sphinx Unbloated Theme, an HTML theme for Sphinx."""
 
 from pathlib import Path
 
@@ -25,20 +25,20 @@ def _build_subnav(app, pagename, docnames):
 
 
 def _add_nav_context(app, pagename, templatename, context, doctree):
-    """Inject navigation context into every page's template.
+    """Add navigation links to the page template context.
 
-    ``nav_links``         — top-level section buttons (always present).
-    ``breadcrumb_levels`` — list of ancestor levels rendered *before* the page
-                            body, each as ``{title, url, subnav}``.
-    ``subnav_links``      — children of the current page; JS moves them
-                            immediately after the page <h1>.
+    ``nav_links`` contains Home and the top-level sections.
+    ``breadcrumb_levels`` contains the top-level section's title, URL, and
+    child links, rendered before the page body as ``{title, url, subnav}``.
+    ``subnav_links`` contains the current page's children. JavaScript moves
+    these links after the page's first ``<h1>``.
     """
     master = app.config.master_doc
     toctree_includes = getattr(app.env, "toctree_includes", {})
     top_level_docs = toctree_includes.get(master, [])
     page_section = pagename.split("/")[0]
 
-    # ── Main nav (always the same) ────────────────────────────────────────────
+    # Keep the same navigation links on every page.
     nav_links = [("Home", app.builder.get_relative_uri(pagename, master), pagename == master)]
     for doc in top_level_docs:
         title_node = app.env.titles.get(doc)
@@ -52,16 +52,15 @@ def _add_nav_context(app, pagename, templatename, context, doctree):
         ))
     context["nav_links"] = nav_links
 
-    # ── Breadcrumb chain + current-page subnav ───────────────────────────────
-    breadcrumb_levels = []   # ancestor levels rendered before the body
-    subnav_links = []        # current page's own children (JS-placed after h1)
+    breadcrumb_levels = []   # Rendered before the page body.
+    subnav_links = []        # Moved after the first h1 by JavaScript.
 
     if pagename == master:
         context["breadcrumb_levels"] = breadcrumb_levels
         context["subnav_links"] = subnav_links
         return
 
-    # Find the top-level section that owns this page
+    # Match the page's first path segment to a top-level section.
     section_doc = next(
         (doc for doc in top_level_docs if doc.split("/")[0] == page_section),
         None,
@@ -74,11 +73,10 @@ def _add_nav_context(app, pagename, templatename, context, doctree):
     section_children = toctree_includes.get(section_doc, [])
 
     if pagename == section_doc:
-        # We ARE the section page — its children become the JS-placed subnav.
+        # On a section page, show its children after the title.
         subnav_links = _build_subnav(app, pagename, section_children)
     else:
-        # We are a descendant — build the breadcrumb chain upward.
-        # Level 1: top-level section → its children (with current branch active)
+        # On a descendant page, show the section and its children above the body.
         section_title_node = app.env.titles.get(section_doc)
         breadcrumb_levels.append({
             "title": section_title_node.astext() if section_title_node else section_doc,
@@ -86,8 +84,7 @@ def _add_nav_context(app, pagename, templatename, context, doctree):
             "subnav": _build_subnav(app, pagename, section_children),
         })
 
-        # Level 2+: walk deeper if the current page itself has children
-        # (supports arbitrary depth for future use)
+        # Show the current page's children after its title, if any.
         current_children = toctree_includes.get(pagename, [])
         subnav_links = _build_subnav(app, pagename, current_children)
 

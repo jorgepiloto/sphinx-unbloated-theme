@@ -1,15 +1,14 @@
-# # Central limit theorem
+# # Central Limit Theorem
 #
-# The **Central Limit Theorem** (CLT) states that the normalised sum of
-# independent, identically distributed random variables converges to a standard
-# normal distribution as the sample size grows — regardless of the shape of
-# the underlying distribution.
+# The central limit theorem (CLT) states that standardized sums of independent,
+# identically distributed random variables with finite, nonzero variance
+# approach a standard normal distribution as the sample size grows.
 #
-# This example draws samples from three very different distributions (uniform,
-# exponential, and Poisson), forms running averages of increasing size ``n``,
-# and shows the histograms of the standardised sums converging to ``N(0, 1)``.
+# Draw samples from uniform, exponential, and Poisson distributions. Compute
+# averages for increasing sample sizes ``n``, standardize them, and compare
+# their histograms with ``N(0, 1)``.
 #
-# Only NumPy and Matplotlib are needed.
+# This example uses NumPy and Matplotlib.
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -20,10 +19,10 @@ rng     = np.random.default_rng(seed=0)
 N_draws = 50_000    # number of independent sums per experiment
 n_sizes = [1, 2, 5, 30]   # sample sizes to demonstrate
 
-# ## Sampling functions
+# ## Sampling Functions
 #
 # Each returns an ``(N_draws, n)`` array of i.i.d. samples together with the
-# population mean ``μ`` and standard deviation ``σ`` for standardisation.
+# population mean ``μ`` and standard deviation ``σ`` for standardization.
 
 def sample_uniform(n):
     X = rng.uniform(0, 1, size=(N_draws, n))
@@ -41,7 +40,7 @@ def sample_poisson(n):
     X = rng.poisson(lam=lam, size=(N_draws, n))
     return X, lam, np.sqrt(lam)
 
-# ## Computing standardised sums
+# ## Compute Standardized Sums
 #
 # For each distribution and each ``n``, compute ``Z = (X̄ - μ) / (σ / √n)``.
 
@@ -79,10 +78,10 @@ for row, (dist_name, sampler) in enumerate(distributions):
 plt.tight_layout()
 plt.show()
 
-# ## Normality check (n = 30)
+# ## Sample Moments at n = 30
 #
-# Verify that the standardised sums are close to N(0, 1) by checking that
-# the sample mean and standard deviation match the theoretical values.
+# Compare the sample mean and standard deviation with the expected values
+# of 0 and 1. These moments alone do not establish normality.
 
 print("Standardised sum statistics at n=30 (expect mean≈0, std≈1):")
 for dist_name, sampler in distributions:

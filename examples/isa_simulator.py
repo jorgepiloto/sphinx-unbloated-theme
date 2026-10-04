@@ -1,16 +1,16 @@
-# # ISA atmospheric model
+# # ISA Atmospheric Model
 #
-# The **International Standard Atmosphere** (ISA, ISO 2533:1975) defines how
+# The International Standard Atmosphere (ISA, ISO 2533:1975) defines how
 # temperature, pressure, density, and speed of sound vary with altitude up to
 # 86 km. This example computes each property layer by layer and plots their
-# evolution with altitude.
+# variation with altitude.
 #
-# No external solver is required — only NumPy and Matplotlib.
+# This example uses NumPy and Matplotlib.
 
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ## ISA layer definitions
+# ## ISA Layer Definitions
 #
 # The atmosphere is divided into layers, each with a base geopotential altitude
 # (m), a base temperature (K), and a temperature lapse rate (K/m).
@@ -37,7 +37,7 @@ T0 = 288.15   # K
 P0 = 101_325  # Pa
 rho0 = P0 / (R * T0)
 
-# ## Computing ISA properties
+# ## Compute ISA Properties
 
 def isa_properties(altitudes_m: np.ndarray):
     """
@@ -46,7 +46,7 @@ def isa_properties(altitudes_m: np.ndarray):
     Parameters
     ----------
     altitudes_m : numpy.ndarray
-        Geopotential altitudes in metres.
+        Geopotential altitudes in meters.
 
     Returns
     -------
@@ -64,7 +64,7 @@ def isa_properties(altitudes_m: np.ndarray):
     P = np.empty_like(altitudes_m)
 
     for i, h in enumerate(altitudes_m):
-        # Walk through layers to find the one containing h
+        # Find the layer containing altitude h.
         T_base, P_base = T0, P0
         for layer_idx in range(len(LAYERS) - 1):
             h_base, T_b, L = LAYERS[layer_idx]
@@ -79,7 +79,7 @@ def isa_properties(altitudes_m: np.ndarray):
                     P[i] = P_base * (T[i] / T_b) ** (-g0 / (L * R))
                 break
             else:
-                # Advance to next layer base
+                # Compute pressure at the next layer boundary.
                 dh = h_top - h_base
                 T_top = T_b + L * dh
                 if L == 0.0:
@@ -97,9 +97,9 @@ def isa_properties(altitudes_m: np.ndarray):
 h = np.linspace(0, 86_000, 1_000)
 
 T, P, rho, a = isa_properties(h)
-h_km = h / 1_000  # convert to km for plotting
+h_km = h / 1_000  # Convert to km for plotting.
 
-# ## Plotting ISA properties
+# ## Plot ISA Properties
 
 fig, axes = plt.subplots(1, 4, figsize=(14, 6), sharey=True)
 fig.suptitle("International Standard Atmosphere (ISA)", fontsize=14, fontweight="bold")
@@ -133,9 +133,9 @@ for ax in axes:
 plt.tight_layout()
 plt.show()
 
-# ## Sea-level reference values
+# ## Sea-Level Reference Values
 #
-# Let's also print the exact ISA values at sea level for verification.
+# Print the computed sea-level values for comparison with the ISA reference.
 
 T_sl, P_sl, rho_sl, a_sl = [x[0] for x in isa_properties(np.array([0.0]))]
 print(f"Sea-level temperature : {T_sl:.2f} K  ({T_sl - 273.15:.2f} °C)")

@@ -27,7 +27,7 @@ repos:
   - id: check-yaml
   - id: trailing-whitespace
 
-# this validates our github workflow files
+# Validate GitHub workflow files.
 - repo: https://github.com/python-jsonschema/check-jsonschema
   rev: 0.31.0
   hooks:
