@@ -65,7 +65,7 @@ html_baseurl = os.getenv("DOCUMENTATION_BASE_URL", "")
 html_theme_options = {
     "site_description": "A Sphinx theme with monospace text and black and white headers.",
     "footer_text": f"&copy; {datetime.now().year} Jorge Martinez. Built with the Sphinx Unbloated Theme.",
-    "github_url": "https://github.com/jorgemartinez",
+    "github_url": "https://github.com/jorgepiloto/sphinx-unbloated-theme",
     "versions_url": f"https://{cname}/versions.json",
 }
 

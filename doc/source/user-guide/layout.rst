@@ -27,8 +27,7 @@ Page Navigation
 A back button below the content links to the parent page. Top-level pages link
 back to Home. The button has a left arrow, a black border, and a gray shadow.
 Hovering or focusing it with the keyboard switches to white text on black.
-On short pages, the content area expands to keep the button just above the
-footer.
+On short pages, the content area expands to keep the button next to the footer.
 
 Table of Contents
 -----------------

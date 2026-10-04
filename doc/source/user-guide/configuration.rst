@@ -70,7 +70,7 @@ Available Options
        }
 
 ``sponsor_url``
-    A sponsorship page URL, such as GitHub Sponsors or Open Collective.
+    A URL for GitHub Sponsors, Open Collective, or another sponsorship page.
     Adds a heart-shield icon link to the header. The default is an empty
     string, which hides the icon.
 
@@ -164,7 +164,7 @@ source directory. To give each class its own page, set
 ``autoapi_own_page_level = "class"``.
 
 Use the arrow keys, Home, and End to switch summary tabs. All summary groups
-remain visible when JavaScript is disabled.
+remain visible when JavaScript is turned off.
 
 To use your own templates, set ``autoapi_template_dir`` to your template
 directory instead.
