@@ -12,7 +12,15 @@ packages = ["src/sphinx_unbloated_theme"]
 [tool.hatch.build.targets.sdist]
 include = [
     "src/",
+    "AUTHORS",
+    "CHANGELOG.md",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "CONTRIBUTORS.md",
+    "LICENSE",
     "README.rst",
+    "SECURITY.md",
+    "doc/source/changelog.rst",
     "pyproject.toml",
 ]
 
@@ -22,12 +30,15 @@ dynamic = ["version"]
 description = "A minimal, clean Sphinx theme with a monospace aesthetic."
 readme = "README.rst"
 requires-python = ">=3.12"
-license = {text = "MIT"}
+license = {file = "LICENSE"}
+authors = [
+    {name = "Jorge Martinez", email = "contact@jorgemartinez.space"},
+]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Framework :: Sphinx",
     "Framework :: Sphinx :: Theme",
-    "License :: OSI Approved :: MIT License",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",

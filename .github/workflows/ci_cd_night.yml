@@ -1,0 +1,181 @@
+name: night
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+    inputs:
+      run-doc:
+        description: Build and deploy documentation.
+        required: true
+        default: true
+        type: boolean
+      run-tests:
+        description: Run browser and package tests.
+        required: true
+        default: true
+        type: boolean
+
+env:
+  PROJECT_NAME: 'sphinx-unbloated-theme'
+  DOCUMENTATION_CNAME: 'jorgemartinez.space/projects/sphinx-unbloated-theme'
+  MAIN_PYTHON_VERSION: '3.12'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  build-wheelhouse:
+    if: github.event_name != 'workflow_dispatch' || inputs.run-doc || inputs.run-tests
+    name: Wheel / ${{ matrix.os }} / Python ${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ['3.12', '3.13']
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Set Up Python
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Build and Install Wheel
+        run: |
+          uv build
+          uv venv
+          uv pip install dist/*.whl
+
+      - name: Check Installed Theme
+        run: |
+          uv run --no-project python -c "from importlib.metadata import entry_points; from pathlib import Path; from sphinx_unbloated_theme import get_autoapi_templates_dir; assert any(ep.name == 'sphinx_unbloated_theme' for ep in entry_points(group='sphinx.html_themes')); assert (Path(get_autoapi_templates_dir()) / 'python' / 'class.rst').is_file()"
+
+  doc-build:
+    if: github.event_name != 'workflow_dispatch' || inputs.run-doc || inputs.run-tests
+    name: Doc Build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Set Up Python
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+
+      - name: Set Up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+
+      - name: Build Theme CSS
+        shell: bash
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: 'true'
+        run: |
+          npm install
+          npm run build
+
+      - name: Set Up Quarto
+        uses: quarto-dev/quarto-actions/setup@8a96df13519ee81fd526f2dfca5962811136661b # v2.2.0
+        with:
+          tinytex: true
+
+      - name: Install Pandoc and Tox
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc
+          uv tool install tox
+
+      - name: Check Documentation Links
+        shell: bash
+        run: tox -e doc-links
+
+      - name: Build HTML Documentation
+        shell: bash
+        run: tox -e doc-html
+
+      - name: Upload HTML Documentation
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: documentation-html
+          path: doc/_build/html
+          if-no-files-found: error
+
+  tests:
+    if: github.event_name != 'workflow_dispatch' || inputs.run-tests
+    name: Browser Tests
+    needs: doc-build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Set Up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+
+      - name: Download Documentation
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: documentation-html
+          path: doc/_build/html
+
+      - name: Run Browser Tests
+        run: |
+          npm install
+          npx playwright install --with-deps chromium firefox
+          npm test
+
+
+  doc-deploy-dev:
+    name: Deploy Dev Docs
+    needs: doc-build
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (github.event_name != 'workflow_dispatch' || inputs.run-doc)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    concurrency:
+      group: website-documentation
+      cancel-in-progress: false
+    steps:
+      - name: Download Documentation
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: documentation-html
+          path: documentation-html
+
+      - name: Deploy Documentation
+        uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4.1.0
+        with:
+          personal_token: ${{ secrets.WEBSITE_DEPLOY_KEY }}
+          external_repository: jorgepiloto/website
+          publish_dir: documentation-html
+          publish_branch: gh-pages
+          destination_dir: projects/sphinx-unbloated-theme/version/dev

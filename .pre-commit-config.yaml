@@ -11,7 +11,7 @@ repos:
   rev: v2.3.0
   hooks:
   - id: codespell
-    args: ["--ignore-words", "doc/styles/config/vocabularies/ANSYS/accept.txt", "-w"]
+    args: ["--ignore-words-list", "afterall,synopsys"]
 
 - repo: https://github.com/pycontribs/mirrors-prettier
   rev: v3.4.2
@@ -27,16 +27,9 @@ repos:
   - id: check-yaml
   - id: trailing-whitespace
 
-# Validate GitHub workflow files.
+# Validate GitHub workflows and local actions.
 - repo: https://github.com/python-jsonschema/check-jsonschema
   rev: 0.31.0
   hooks:
     - id: check-github-workflows
-
-- repo: https://github.com/ansys/pre-commit-hooks
-  rev: v0.5.1
-  hooks:
-  - id: add-license-headers
-    files: '(src|doc/source/examples)/.*\.(py)'
-    args:
-    - --start_year=2021
+    - id: check-github-actions

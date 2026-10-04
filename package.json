@@ -1,5 +1,6 @@
 {
     "name": "sphinx-unbloated-theme",
+    "license": "GPL-3.0-only",
     "repository": "https://github.com/jorgemartinez/sphinx-unbloated-theme",
     "scripts": {
         "build:css": "postcss src/sphinx_unbloated_theme/theme/sphinx_unbloated_theme/static/css/style.css -o src/sphinx_unbloated_theme/theme/sphinx_unbloated_theme/static/css/style.css",
