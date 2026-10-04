@@ -1,8 +1,8 @@
 {
-    "name": "unbloated_sphinx_theme",
-    "repository": "https://github.com/jorgemartinez/unbloated-sphinx-theme",
+    "name": "sphinx-unbloated-theme",
+    "repository": "https://github.com/jorgemartinez/sphinx-unbloated-theme",
     "scripts": {
-        "build:css": "postcss src/unbloated_sphinx_theme/theme/unbloated_sphinx_theme/static/css/style.css -o src/unbloated_sphinx_theme/theme/unbloated_sphinx_theme/static/css/style.css",
+        "build:css": "postcss src/sphinx_unbloated_theme/theme/sphinx_unbloated_theme/static/css/style.css -o src/sphinx_unbloated_theme/theme/sphinx_unbloated_theme/static/css/style.css",
         "build": "npm run build:css",
         "test:visual:ref": "backstop reference --config tests/backstop/backstop.config.js",
         "test:visual": "backstop test --config tests/backstop/backstop.config.js",

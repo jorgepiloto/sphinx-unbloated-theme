@@ -16,10 +16,10 @@ from sphinx.util.display import status_iterator
 
 sys.path.insert(0, str(Path(__file__).parents[2] / "src"))
 
-from unbloated_sphinx_theme import __version__
+from sphinx_unbloated_theme import __version__
 
 # Project information
-project = "Unbloated Sphinx Theme"
+project = "Sphinx Unbloated Theme"
 copyright = f"{datetime.now().year}, Jorge Martinez"
 author = "Jorge Martinez"
 release = version = __version__
@@ -50,14 +50,14 @@ autodoc_default_options = {
 }
 
 # HTML configuration
-html_theme = "unbloated_sphinx_theme"
-html_title = "Unbloated Sphinx Theme"
-html_short_title = "Unbloated Sphinx Theme"
-html_baseurl = "https://jorgemartinez.space/projects/unbloated-sphinx-theme/version/stable/"
+html_theme = "sphinx_unbloated_theme"
+html_title = "Sphinx Unbloated Theme"
+html_short_title = "Sphinx Unbloated Theme"
+html_baseurl = "https://jorgemartinez.space/projects/sphinx-unbloated-theme/version/stable/"
 
 html_theme_options = {
     "site_description": "A minimal, clean Sphinx theme with a monospace aesthetic.",
-    "footer_text": f"&copy; {datetime.now().year} Jorge Martinez. Built with the Unbloated Sphinx Theme.",
+    "footer_text": f"&copy; {datetime.now().year} Jorge Martinez. Built with the Sphinx Unbloated Theme.",
     "github_url": "https://github.com/jorgemartinez",
     "versions_url": f"https://{cname}/versions.json",
 }

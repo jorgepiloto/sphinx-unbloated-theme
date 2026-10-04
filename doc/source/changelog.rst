@@ -3,7 +3,7 @@
 Changelog
 #########
 
-All notable changes to the Unbloated Sphinx Theme are documented here.
+All notable changes to the Sphinx Unbloated Theme are documented here.
 
 .. vale off
 

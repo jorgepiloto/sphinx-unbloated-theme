@@ -1,5 +1,5 @@
 module.exports = {
-  id: "unbloated-sphinx-theme",
+  id: "sphinx-unbloated-theme",
 
   viewports: [
     { label: "desktop", width: 1280, height: 900 },

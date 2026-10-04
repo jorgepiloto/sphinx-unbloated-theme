@@ -3,11 +3,11 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.version]
-path = "src/unbloated_sphinx_theme/__init__.py"
+path = "src/sphinx_unbloated_theme/__init__.py"
 pattern = '__version__ = "(?P<version>[^"]+)"'
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/unbloated_sphinx_theme"]
+packages = ["src/sphinx_unbloated_theme"]
 
 [tool.hatch.build.targets.sdist]
 include = [
@@ -17,7 +17,7 @@ include = [
 ]
 
 [project]
-name = "unbloated-sphinx-theme"
+name = "sphinx-unbloated-theme"
 dynamic = ["version"]
 description = "A minimal, clean Sphinx theme with a monospace aesthetic."
 readme = "README.rst"
@@ -49,20 +49,20 @@ doc = [
 ]
 
 [project.entry-points."sphinx.html_themes"]
-unbloated_sphinx_theme = "unbloated_sphinx_theme"
+sphinx_unbloated_theme = "sphinx_unbloated_theme"
 
 [project.urls]
-Source = "https://github.com/jorgemartinez/unbloated-sphinx-theme"
-Documentation = "https://jorgemartinez.space/projects/unbloated-sphinx-theme/version/stable/"
-Tracker = "https://github.com/jorgemartinez/unbloated-sphinx-theme/issues"
+Source = "https://github.com/jorgemartinez/sphinx-unbloated-theme"
+Documentation = "https://jorgemartinez.space/projects/sphinx-unbloated-theme/version/stable/"
+Tracker = "https://github.com/jorgemartinez/sphinx-unbloated-theme/issues"
 
 [tool.towncrier]
 directory = "doc/source/changelog"
 filename = "doc/source/changelog.rst"
 template = "doc/source/changelog/template"
 start_string = ".. towncrier release notes start\n"
-title_format = "`{version} <https://github.com/jorgepiloto/unbloated-sphinx-theme/releases/tag/v{version}>`_ ({project_date})"
-issue_format = "`#{issue} <https://github.com/jorgepiloto/unbloated-sphinx-theme/pull/{issue}>`_"
+title_format = "`{version} <https://github.com/jorgepiloto/sphinx-unbloated-theme/releases/tag/v{version}>`_ ({project_date})"
+issue_format = "`#{issue} <https://github.com/jorgepiloto/sphinx-unbloated-theme/pull/{issue}>`_"
 
 [[tool.towncrier.type]]
 directory = "added"

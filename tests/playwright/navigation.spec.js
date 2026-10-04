@@ -5,7 +5,7 @@ test.describe("Navigation", () => {
     await page.goto("/index.html");
     const title = page.locator("header h1.title");
     await expect(title).toBeVisible();
-    await expect(title).toContainText("Unbloated Sphinx Theme");
+    await expect(title).toContainText("Sphinx Unbloated Theme");
   });
 
   test("header contains the search form", async ({ page }) => {

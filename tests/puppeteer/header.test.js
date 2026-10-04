@@ -30,7 +30,7 @@ describe("Header", () => {
 
   test("project title is rendered in header", async () => {
     const text = await page.$eval("header h1.title", (el) => el.textContent.trim());
-    expect(text).toBe("Unbloated Sphinx Theme");
+    expect(text).toBe("Sphinx Unbloated Theme");
   });
 
   test("header contains the search form", async () => {

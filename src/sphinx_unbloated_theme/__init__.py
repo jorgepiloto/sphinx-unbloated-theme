@@ -1,12 +1,12 @@
-"""Unbloated Sphinx Theme — a minimal, clean Sphinx theme."""
+"""Sphinx Unbloated Theme, a minimal, clean Sphinx theme."""
 
 from pathlib import Path
 
 
 __version__ = "0.1.dev0"
-"""Current version of the Unbloated Sphinx Theme."""
+"""Current version of the Sphinx Unbloated Theme."""
 
-THEME_PATH = Path(__file__).parent / "theme" / "unbloated_sphinx_theme"
+THEME_PATH = Path(__file__).parent / "theme" / "sphinx_unbloated_theme"
 
 
 def _build_subnav(app, pagename, docnames):
@@ -97,7 +97,7 @@ def _add_nav_context(app, pagename, templatename, context, doctree):
 
 def setup(app):
     """Register the theme with Sphinx."""
-    app.add_html_theme("unbloated_sphinx_theme", THEME_PATH)
+    app.add_html_theme("sphinx_unbloated_theme", THEME_PATH)
     app.connect("html-page-context", _add_nav_context)
     return {
         "version": "0.1.0",

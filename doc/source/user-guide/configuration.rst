@@ -108,11 +108,11 @@ Full example
 
 .. code-block:: python
 
-   html_theme = "unbloated_sphinx_theme"
+   html_theme = "sphinx_unbloated_theme"
 
    html_theme_options = {
        "site_description": "My project documentation.",
-       "footer_text": "&copy; 2026 My Name. Built with the Unbloated Sphinx Theme.",
+       "footer_text": "&copy; 2026 My Name. Built with the Sphinx Unbloated Theme.",
        "github_url": "https://github.com/my-org/my-project",
        "linkedin_url": "https://www.linkedin.com/in/my-profile/",
        "youtube_url": "https://www.youtube.com/@my-channel",

@@ -1,21 +1,21 @@
-.. image:: https://jorgemartinez.space/projects/unbloated-sphinx-theme/version/stable/_static/logo.png
-   :target: https://jorgemartinez.space/projects/unbloated-sphinx-theme/version/stable/
-   :alt: Unbloated Sphinx Theme
+.. image:: https://jorgemartinez.space/projects/sphinx-unbloated-theme/version/stable/_static/logo.png
+   :target: https://jorgemartinez.space/projects/sphinx-unbloated-theme/version/stable/
+   :alt: Sphinx Unbloated Theme
 
 |
 
 |python| |pypi| |GH-CI| |MIT|
 
-.. |python| image:: https://img.shields.io/pypi/pyversions/unbloated-sphinx-theme?logo=python&logoColor=white&label=Python
-   :target: https://pypi.org/project/unbloated-sphinx-theme/
+.. |python| image:: https://img.shields.io/pypi/pyversions/sphinx-unbloated-theme?logo=python&logoColor=white&label=Python
+   :target: https://pypi.org/project/sphinx-unbloated-theme/
    :alt: Python
 
-.. |pypi| image:: https://img.shields.io/pypi/v/unbloated-sphinx-theme.svg?logo=pypi&logoColor=white&label=PyPI
-   :target: https://pypi.org/project/unbloated-sphinx-theme/
+.. |pypi| image:: https://img.shields.io/pypi/v/sphinx-unbloated-theme.svg?logo=pypi&logoColor=white&label=PyPI
+   :target: https://pypi.org/project/sphinx-unbloated-theme/
    :alt: PyPI
 
-.. |GH-CI| image:: https://github.com/jorgemartinez/unbloated-sphinx-theme/actions/workflows/ci.yml/badge.svg
-   :target: https://github.com/jorgemartinez/unbloated-sphinx-theme/actions/workflows/ci.yml
+.. |GH-CI| image:: https://github.com/jorgemartinez/sphinx-unbloated-theme/actions/workflows/ci.yml/badge.svg
+   :target: https://github.com/jorgemartinez/sphinx-unbloated-theme/actions/workflows/ci.yml
    :alt: GH-CI
 
 .. |MIT| image:: https://img.shields.io/badge/License-MIT-white.svg?labelColor=black
@@ -25,7 +25,7 @@
 About
 =====
 
-The Unbloated Sphinx Theme is a minimal, clean HTML theme for
+The Sphinx Unbloated Theme is a minimal, clean HTML theme for
 `Sphinx <https://www.sphinx-doc.org/>`_. It is built on Sphinx's ``basic``
 theme — the only dependency — and uses vanilla CSS with no third-party
 frameworks or bundlers.
@@ -44,13 +44,13 @@ Quick install with pip:
 
 .. code-block:: bash
 
-   pip install unbloated-sphinx-theme
+   pip install sphinx-unbloated-theme
 
 Then set the theme in your ``conf.py``:
 
 .. code-block:: python
 
-   html_theme = "unbloated_sphinx_theme"
+   html_theme = "sphinx_unbloated_theme"
 
 Documentation
 =============
@@ -97,20 +97,20 @@ for the full licence text.
 Changelog
 =========
 
-The changelog tracks notable changes for each release of the Unbloated Sphinx
+The changelog tracks notable changes for each release of the Sphinx Unbloated
 Theme. To view the full history, see the `changelog file`_ in the repository.
 
 
-.. _prerequisites: https://jorgemartinez.space/projects/unbloated-sphinx-theme/version/stable/getting-started/prerequisites.html
-.. _installation guidelines: https://jorgemartinez.space/projects/unbloated-sphinx-theme/version/stable/getting-started/installation.html
+.. _prerequisites: https://jorgemartinez.space/projects/sphinx-unbloated-theme/version/stable/getting-started/prerequisites.html
+.. _installation guidelines: https://jorgemartinez.space/projects/sphinx-unbloated-theme/version/stable/getting-started/installation.html
 
-.. _official documentation: https://jorgemartinez.space/projects/unbloated-sphinx-theme/version/stable/
-.. _getting started: https://jorgemartinez.space/projects/unbloated-sphinx-theme/version/stable/getting-started.html
-.. _user guide: https://jorgemartinez.space/projects/unbloated-sphinx-theme/version/stable/user-guide.html
-.. _api reference: https://jorgemartinez.space/projects/unbloated-sphinx-theme/version/stable/api-reference.html
-.. _examples: https://jorgemartinez.space/projects/unbloated-sphinx-theme/version/stable/examples.html
-.. _changelog: https://jorgemartinez.space/projects/unbloated-sphinx-theme/version/stable/changelog.html
+.. _official documentation: https://jorgemartinez.space/projects/sphinx-unbloated-theme/version/stable/
+.. _getting started: https://jorgemartinez.space/projects/sphinx-unbloated-theme/version/stable/getting-started.html
+.. _user guide: https://jorgemartinez.space/projects/sphinx-unbloated-theme/version/stable/user-guide.html
+.. _api reference: https://jorgemartinez.space/projects/sphinx-unbloated-theme/version/stable/api-reference.html
+.. _examples: https://jorgemartinez.space/projects/sphinx-unbloated-theme/version/stable/examples.html
+.. _changelog: https://jorgemartinez.space/projects/sphinx-unbloated-theme/version/stable/changelog.html
 
-.. _project repository: https://github.com/jorgemartinez/unbloated-sphinx-theme
-.. _LICENSE: https://github.com/jorgemartinez/unbloated-sphinx-theme/blob/main/LICENSE
-.. _changelog-file: https://github.com/jorgemartinez/unbloated-sphinx-theme/blob/main/CHANGELOG.md
+.. _project repository: https://github.com/jorgemartinez/sphinx-unbloated-theme
+.. _LICENSE: https://github.com/jorgemartinez/sphinx-unbloated-theme/blob/main/LICENSE
+.. _changelog-file: https://github.com/jorgemartinez/sphinx-unbloated-theme/blob/main/CHANGELOG.md

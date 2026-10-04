@@ -1,4 +1,4 @@
-Unbloated Sphinx Theme
+Sphinx Unbloated Theme
 ######################
 
 A minimal, clean Sphinx theme with a monospace aesthetic. No frameworks, no

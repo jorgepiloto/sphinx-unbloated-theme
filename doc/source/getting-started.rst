@@ -3,7 +3,7 @@
 Getting started
 ###############
 
-This section walks you through everything you need to get the Unbloated Sphinx
+This section walks you through everything you need to get the Sphinx Unbloated
 Theme up and running in your project.
 
 .. toctree::

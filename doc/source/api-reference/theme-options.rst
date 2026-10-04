@@ -5,7 +5,7 @@ Theme options
 
 The following options can be passed via ``html_theme_options`` in ``conf.py``.
 They are declared in
-``src/unbloated_sphinx_theme/theme/unbloated_sphinx_theme/theme.toml``.
+``src/sphinx_unbloated_theme/theme/sphinx_unbloated_theme/theme.toml``.
 
 .. list-table::
    :header-rows: 1

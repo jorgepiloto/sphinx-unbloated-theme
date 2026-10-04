@@ -3,7 +3,7 @@
 Prerequisites
 #############
 
-Before installing the Unbloated Sphinx Theme, make sure your environment meets
+Before installing the Sphinx Unbloated Theme, make sure your environment meets
 the following requirements.
 
 Python

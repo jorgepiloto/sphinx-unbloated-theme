@@ -131,6 +131,6 @@ Images
 
 .. figure:: /_static/logo.png
    :align: center
-   :alt: Unbloated Sphinx Theme logo
+   :alt: Sphinx Unbloated Theme logo
 
    A figure caption appears below the image in italics.
