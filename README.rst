@@ -1,9 +1,3 @@
-.. image:: https://jorgemartinez.space/projects/sphinx-unbloated-theme/version/stable/_static/logo.png
-   :target: https://jorgemartinez.space/projects/sphinx-unbloated-theme/version/stable/
-   :alt: Sphinx Unbloated Theme
-
-|
-
 |python| |pypi| |GH-CI| |MIT|
 
 .. |python| image:: https://img.shields.io/pypi/pyversions/sphinx-unbloated-theme?logo=python&logoColor=white&label=Python

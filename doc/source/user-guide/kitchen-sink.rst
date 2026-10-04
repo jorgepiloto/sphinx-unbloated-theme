@@ -125,12 +125,3 @@ A multi-line equation — Euler's identity and the Gaussian integral:
 
    e^{i\pi} + 1 &= 0 \\
    \int_{-\infty}^{\infty} e^{-x^2}\, dx &= \sqrt{\pi}
-
-Images
-------
-
-.. figure:: /_static/logo.png
-   :align: center
-   :alt: Sphinx Unbloated Theme logo
-
-   A figure caption appears below the image in italics.
