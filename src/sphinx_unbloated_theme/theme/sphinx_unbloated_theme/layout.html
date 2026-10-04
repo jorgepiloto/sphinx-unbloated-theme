@@ -70,7 +70,19 @@
   {%- endfor %}
 </nav>
 {%- endblock %}
-{%- block relbar2 %}{% endblock %}
+{%- block relbar2 %}
+{%- if pagename != master_doc %}
+{%- set parent = parents[-1] if parents else none %}
+<nav class="page-navigation" aria-label="{{ _('Page navigation') }}">
+  <a class="back-button" href="{{ parent.link if parent else pathto(master_doc) }}">
+    <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <path d="M19 12H5M12 19l-7-7 7-7" />
+    </svg>
+    <span>{{ (_('Back to %(title)s') % {'title': parent.title|striptags if parent else _('Home')})|e }}</span>
+  </a>
+</nav>
+{%- endif %}
+{%- endblock %}
 
 {# Leave the sidebar blocks empty. #}
 {%- block sidebar1 %}{% endblock %}

@@ -11,8 +11,8 @@ the layout used on `jorgemartinez.space <https://jorgemartinez.space>`_:
     ``conf.py``) and, optionally, the ``site_description`` theme option.
 
 ``<nav>``
-    A row of monospace buttons linking to the parent pages and the previous /
-    next document. Buttons invert to white-on-black on hover or when active.
+    Monospace buttons link to the top-level sections and the current section's
+    child pages. They show white text on black when hovered or active.
 
 ``<main>``
     The full-width content area. No sidebar is rendered; the document takes all
@@ -22,7 +22,16 @@ the layout used on `jorgemartinez.space <https://jorgemartinez.space>`_:
     Black background, white text. Renders the value of the ``footer_text``
     theme option, or a default copyright + Sphinx notice.
 
-No sidebar
+Page Navigation
+---------------
+
+A back button below the content links to the parent page. Top-level pages link
+back to Home. The button has a left arrow, a black border, and a gray shadow.
+Hovering or focusing it with the keyboard switches to white text on black.
+On short pages, the content area expands to keep the button just above the
+footer.
+
+No Sidebar
 ----------
 
 The ``basic`` theme's sidebar is suppressed entirely. If you need a table of

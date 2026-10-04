@@ -88,6 +88,11 @@ body {
     box-shadow: var(--shadow);
 }
 
+/* Fill the space above bottom navigation with Sphinx's content wrapper. */
+body > .document {
+    flex: 1;
+}
+
 /* Header */
 
 header {
@@ -243,6 +248,55 @@ nav.subnav {
     margin-top: 0;
     margin-bottom: 1rem;
     border-top: none;
+}
+
+nav.subnav-current {
+    margin-bottom: 2rem;
+}
+
+/* Bottom Navigation */
+
+nav.page-navigation {
+    justify-content: flex-start;
+    padding: 0 2.5rem;
+    margin: 1.5rem 0;
+
+    & a.back-button {
+        display: inline-flex;
+        flex: 0 1 auto;
+        align-items: center;
+        gap: 0.5rem;
+        max-width: 100%;
+        font-size: 1rem;
+        font-family: var(--font-family-code);
+        line-height: normal;
+        padding: 2px 6px;
+        box-sizing: border-box;
+        background-color: var(--white);
+        border: thin solid var(--black);
+        box-shadow: 2px 2px var(--darkgray);
+        transition: background-color 0.3s ease;
+        color: var(--black);
+
+        &:visited {
+            color: var(--black);
+        }
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--black);
+            color: var(--white);
+        }
+
+        &:focus-visible {
+            outline: 2px solid var(--black);
+            outline-offset: 4px;
+        }
+
+        & svg {
+            flex-shrink: 0;
+        }
+    }
 }
 
 /* Breadcrumb title */
