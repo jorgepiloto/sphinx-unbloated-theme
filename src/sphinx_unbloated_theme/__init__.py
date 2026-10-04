@@ -161,25 +161,7 @@ def setup(app):
     app.add_js_file("js/autoapi.js", defer="defer")
     app.connect("html-page-context", _add_nav_context)
     return {
-        "version": "0.1.0",
+        "version": __version__,
         "parallel_read_safe": True,
         "parallel_write_safe": True,
     }
-
-
-def add_two_numbers(a: int, b: int) -> int:
-    """Add two numbers.
-
-    Parameters
-    ----------
-    a : int
-        First number.
-    b : int
-        Second number.
-
-    Returns
-    -------
-    int
-        Sum of the two numbers.
-    """
-    return a + b
