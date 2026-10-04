@@ -18,7 +18,6 @@ venv/
 env/
 
 # Node
-package-lock.json
 node_modules/
 
 # OS
@@ -37,5 +36,6 @@ Thumbs.db
 
 # Testing / coverage
 .tox/
+test-results/
 .coverage
 htmlcov/

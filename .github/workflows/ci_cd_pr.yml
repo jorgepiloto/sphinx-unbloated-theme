@@ -6,6 +6,8 @@ on:
 env:
   PROJECT_NAME: 'sphinx-unbloated-theme'
   DOCUMENTATION_CNAME: 'jorgemartinez.space/projects/sphinx-unbloated-theme'
+  DOCUMENTATION_BASE_URL: >-
+    https://jorgemartinez.space/projects/sphinx-unbloated-theme/version/dev/
   MAIN_PYTHON_VERSION: '3.12'
 
 concurrency:
@@ -103,6 +105,9 @@ jobs:
           uv venv
           uv pip install dist/*.whl
 
+      - name: Check Generated Theme
+        run: uv run --no-project python -m unittest discover -s tests/python
+
       - name: Check Installed Theme
         run: |
           uv run --no-project python -c "from importlib.metadata import entry_points; from pathlib import Path; from sphinx_unbloated_theme import get_autoapi_templates_dir; assert any(ep.name == 'sphinx_unbloated_theme' for ep in entry_points(group='sphinx.html_themes')); assert (Path(get_autoapi_templates_dir()) / 'python' / 'class.rst').is_file()"
@@ -136,7 +141,7 @@ jobs:
         env:
           PUPPETEER_SKIP_DOWNLOAD: 'true'
         run: |
-          npm install
+          npm ci
           npm run build
 
       - name: Set Up Quarto
@@ -188,7 +193,8 @@ jobs:
 
       - name: Run Browser Tests
         run: |
-          npm install
+          npm ci
+          npm audit
           npx playwright install --with-deps chromium firefox
           npm test
 
@@ -222,7 +228,7 @@ jobs:
         env:
           PUPPETEER_SKIP_DOWNLOAD: 'true'
         run: |
-          npm install
+          npm ci
           npm run build
           uv build
           uvx twine check dist/*

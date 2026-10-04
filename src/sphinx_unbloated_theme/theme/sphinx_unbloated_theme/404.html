@@ -1,9 +1,9 @@
 {%- extends "layout.html" -%}
 
-{%- block extrahead %}
+{%- block htmltitle %}
+  {# Set the documentation root before the browser loads relative assets. #}
+  <base href="{{ documentation_root|e }}">
   {{ super() }}
-  {# Resolve asset paths from the site root when the requested URL is missing. #}
-  <base href="/">
 {%- endblock %}
 
 {%- block body %}

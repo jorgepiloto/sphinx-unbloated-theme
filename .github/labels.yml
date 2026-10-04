@@ -89,6 +89,10 @@
 
 # CI/CD labels
 
+- name: 'dependencies:npm'
+  description: Node.js dependency updates
+  color: fabed4
+
 - name: 'ci'
   description: Pipelines maintenance related
   color: a9a9a9

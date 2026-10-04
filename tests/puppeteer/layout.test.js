@@ -1,5 +1,3 @@
-const puppeteer = require("puppeteer");
-
 const BASE_URL = "http://localhost:5000";
 
 describe("Layout", () => {
@@ -7,6 +5,7 @@ describe("Layout", () => {
   let page;
 
   beforeAll(async () => {
+    const { default: puppeteer } = await import("puppeteer");
     browser = await puppeteer.launch({ args: ["--no-sandbox"] });
   });
 

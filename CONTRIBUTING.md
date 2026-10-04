@@ -6,15 +6,15 @@ follow the [code of conduct](CODE_OF_CONDUCT.md).
 
 ## Set Up Your Environment
 
-Use Python 3.12 or later. CI uses Node.js 22. With `uv` available, run these
-commands from the repository root:
+Use Python 3.12 or later and Node.js 22.12 or later. CI uses Node.js 22.
+With `uv` available, run these commands from the repository root:
 
 ```console
 uv venv
 uv pip install --editable .
 uv tool install tox
 uv tool install pre-commit
-npm install
+npm ci
 ```
 
 Install the browsers used by the tests:
@@ -23,9 +23,12 @@ Install the browsers used by the tests:
 npx playwright install --with-deps chromium firefox
 ```
 
-Puppeteer downloads Chrome during `npm install`. Install Pandoc to build the
+Puppeteer downloads Chrome during `npm ci`. Install Pandoc to build the
 notebook examples. Quarto and TinyTeX are also needed to generate their PDF
 downloads.
+
+Commit `package-lock.json` when updating Node.js dependencies. CI uses this
+lockfile for CSS builds and browser tests. Run `npm audit` after an update.
 
 ## Check Code Style
 
@@ -73,6 +76,12 @@ npm test
 This runs the Playwright and Puppeteer suites against `doc/_build/html`.
 Check theme changes on narrow and wide screens, including navigation, search,
 and API pages.
+
+Check generated navigation, deployment paths, and bundled licenses:
+
+```console
+tox -e tests-python
+```
 
 ## Add a Changelog Fragment
 

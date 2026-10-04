@@ -86,6 +86,11 @@ Available Options
     with ``name`` and ``url`` keys. The default is an empty string, which
     hides the dropdown.
 
+    Version destinations must use HTTP or HTTPS and share the documentation
+    site's origin. Relative destinations resolve against the current page.
+    Invalid entries are skipped. If no valid entries remain or the feed fails
+    to load, the dropdown is hidden.
+
     .. code-block:: python
 
        html_theme_options = {
@@ -100,6 +105,20 @@ Available Options
          {"name": "v2.0 (stable)", "url": "https://my-site.com/version/stable/"},
          {"name": "v1.0",          "url": "https://my-site.com/version/v1.0/"}
        ]
+
+404 Pages
+---------
+
+To generate a 404 page, add these settings to ``conf.py``:
+
+.. code-block:: python
+
+   html_additional_pages = {"404": "404.html"}
+   html_baseurl = "https://my-site.com/my-project/"
+
+Set ``html_baseurl`` to the documentation root, including its deployment
+prefix. The 404 page uses that path for assets and navigation when the host
+serves it for a missing URL. An empty ``html_baseurl`` uses the domain root.
 
 Full Example
 ------------

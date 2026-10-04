@@ -6,6 +6,8 @@ on:
 env:
   PROJECT_NAME: 'sphinx-unbloated-theme'
   DOCUMENTATION_CNAME: 'jorgemartinez.space/projects/sphinx-unbloated-theme'
+  DOCUMENTATION_BASE_URL: >-
+    https://jorgemartinez.space/projects/sphinx-unbloated-theme/version/stable/
   MAIN_PYTHON_VERSION: '3.12'
 
 concurrency:
@@ -82,6 +84,9 @@ jobs:
           uv venv
           uv pip install dist/*.whl
 
+      - name: Check Generated Theme
+        run: uv run --no-project python -m unittest discover -s tests/python
+
       - name: Check Installed Theme
         run: |
           uv run --no-project python -c "from importlib.metadata import entry_points; from pathlib import Path; from sphinx_unbloated_theme import get_autoapi_templates_dir; assert any(ep.name == 'sphinx_unbloated_theme' for ep in entry_points(group='sphinx.html_themes')); assert (Path(get_autoapi_templates_dir()) / 'python' / 'class.rst').is_file()"
@@ -114,7 +119,7 @@ jobs:
         env:
           PUPPETEER_SKIP_DOWNLOAD: 'true'
         run: |
-          npm install
+          npm ci
           npm run build
 
       - name: Set Up Quarto
@@ -170,7 +175,8 @@ jobs:
 
       - name: Run Browser Tests
         run: |
-          npm install
+          npm ci
+          npm audit
           npx playwright install --with-deps chromium firefox
           npm test
 
@@ -202,7 +208,7 @@ jobs:
         env:
           PUPPETEER_SKIP_DOWNLOAD: 'true'
         run: |
-          npm install
+          npm ci
           npm run build
           uv build
           uvx twine check dist/*
@@ -295,12 +301,31 @@ jobs:
           RELEASE_TAG: ${{ github.ref_name }}
         run: echo "RELEASE_VERSION=${RELEASE_TAG#v}" >> "$GITHUB_ENV"
 
+      - name: Prepare Versioned Documentation
+        run: |
+          python3 - <<'PYTHON'
+          from pathlib import Path
+          from urllib.parse import urlsplit
+          import os
+          import shutil
+
+          shutil.copytree("documentation-html", "documentation-versioned")
+          page = Path("documentation-versioned/404.html")
+          root = urlsplit(os.environ["DOCUMENTATION_BASE_URL"]).path
+          version = os.environ["RELEASE_VERSION"]
+          version_root = f"{root.rstrip('/').rsplit('/', 1)[0]}/{version}/"
+          content = page.read_text(encoding="utf-8")
+          old_base = f'<base href="{root}">'
+          assert old_base in content, "404 page must declare the documentation root"
+          page.write_text(content.replace(old_base, f'<base href="{version_root}">'), encoding="utf-8")
+          PYTHON
+
       - name: Deploy Versioned Documentation
         uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4.1.0
         with:
           personal_token: ${{ secrets.WEBSITE_DEPLOY_KEY }}
           external_repository: jorgepiloto/website
-          publish_dir: documentation-html
+          publish_dir: documentation-versioned
           publish_branch: gh-pages
           destination_dir: projects/sphinx-unbloated-theme/version/${{ env.RELEASE_VERSION
             }}

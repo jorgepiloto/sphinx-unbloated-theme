@@ -127,6 +127,11 @@ License
 Copyright (c) 2026 Jorge Martinez. This project uses the GNU General Public
 License, version 3 only (``GPL-3.0-only``). See `LICENSE`_ for its terms.
 The bundled AutoAPI templates include their Apache-2.0 license and attribution.
+Source Code Pro fonts retain Adobe's copyright notice and SIL Open Font
+License in ``_static/fonts/LICENSE.txt``. Inline icons adapted from Font
+Awesome retain attribution comments and the license in
+``_static/licenses/font-awesome-LICENSE.txt``. These files are included in
+the package and copied into generated documentation.
 
 Changelog
 =========

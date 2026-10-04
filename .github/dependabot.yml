@@ -1,6 +1,19 @@
 version: 2
 updates:
 
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    cooldown:
+      default-days: 7
+      include:
+        - "*"
+    labels:
+      - "dependencies:npm"
+    commit-message:
+      prefix: "build"
+
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
