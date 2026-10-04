@@ -3,7 +3,7 @@
 Configuration
 #############
 
-All configuration is done through ``html_theme_options`` in your ``conf.py``.
+Set the theme options in ``html_theme_options`` in your ``conf.py``.
 
 Available options
 -----------------
@@ -120,3 +120,34 @@ Full example
        "sponsor_url": "https://github.com/sponsors/my-org",
        "versions_url": "https://my-site.com/versions.json",
    }
+
+AutoAPI Templates
+-----------------
+
+The theme includes templates for `Sphinx AutoAPI
+<https://sphinx-autoapi.readthedocs.io/en/latest/>`_. They group API summaries
+into tabs and include descriptions and member details. Class summaries group
+methods, properties, and attributes and include an import example.
+
+Install ``sphinx-autoapi`` and ``numpydoc``, then select the templates in
+``conf.py``:
+
+.. code-block:: python
+
+   from sphinx_unbloated_theme import get_autoapi_templates_dir
+
+   extensions = ["autoapi.extension", "numpydoc"]
+   html_theme = "sphinx_unbloated_theme"
+   autoapi_dirs = ["../../src/my_project"]
+   autoapi_template_dir = get_autoapi_templates_dir()
+   numpydoc_show_class_members = False
+
+Set ``autoapi_dirs`` to your package directory, relative to the documentation
+source directory. To give each class its own page, set
+``autoapi_own_page_level = "class"``.
+
+Use the arrow keys, Home, and End to switch summary tabs. All summary groups
+remain visible when JavaScript is disabled.
+
+To use your own templates, set ``autoapi_template_dir`` to your template
+directory instead.

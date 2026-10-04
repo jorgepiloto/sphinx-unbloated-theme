@@ -1,5 +1,6 @@
 # Build output
 doc/_build/
+doc/source/api-reference/
 dist/
 
 # Python

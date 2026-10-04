@@ -9,6 +9,17 @@ __version__ = "0.1.dev0"
 THEME_PATH = Path(__file__).parent / "theme" / "sphinx_unbloated_theme"
 
 
+def get_autoapi_templates_dir():
+    """Return the directory containing the theme's AutoAPI templates.
+
+    Returns
+    -------
+    str
+        Absolute directory path for Sphinx's ``autoapi_template_dir`` setting.
+    """
+    return str(THEME_PATH / "_templates" / "autoapi")
+
+
 def _build_subnav(app, pagename, docnames):
     """Build navigation links relative to the current page.
 
@@ -137,6 +148,7 @@ def setup(app):
         Extension metadata with the version and parallel build safety flags.
     """
     app.add_html_theme("sphinx_unbloated_theme", THEME_PATH)
+    app.add_js_file("js/autoapi.js", defer="defer")
     app.connect("html-page-context", _add_nav_context)
     return {
         "version": "0.1.0",

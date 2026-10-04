@@ -46,6 +46,7 @@ doc = [
   "nbsphinx==0.9.8",
   "numpydoc==1.11.0",
   "plotly==6.7.0",
+  "sphinx-autoapi==3.8.1",
   "sphinx-copybutton==0.5.2",
 ]
 

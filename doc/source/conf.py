@@ -9,14 +9,14 @@ import shutil
 import subprocess
 import sys
 
-# Import the package from src so autodoc can run without installing it.
+# Load the local theme and version from src.
 import sphinx
 import sphinx.application
 from sphinx.util.display import status_iterator
 
 sys.path.insert(0, str(Path(__file__).parents[2] / "src"))
 
-from sphinx_unbloated_theme import __version__
+from sphinx_unbloated_theme import __version__, get_autoapi_templates_dir
 
 # Project information
 project = "Sphinx Unbloated Theme"
@@ -27,7 +27,7 @@ cname = os.getenv("DOCUMENTATION_CNAME", "localhost")
 
 # Sphinx extensions
 extensions = [
-    "sphinx.ext.autodoc",
+    "autoapi.extension",
     "sphinx.ext.intersphinx",
     "sphinx.ext.mathjax",
     "sphinx.ext.viewcode",
@@ -43,12 +43,17 @@ intersphinx_mapping = {
     "sphinx": ("https://www.sphinx-doc.org/en/master", None),
 }
 
-# Autodoc settings
-autodoc_default_options = {
-    "members": True,
-    "undoc-members": False,
-    "show-inheritance": True,
-}
+# Generate the API pages under the existing reference section.
+autoapi_dirs = ["../../src/sphinx_unbloated_theme"]
+autoapi_root = "api-reference"
+autoapi_template_dir = get_autoapi_templates_dir()
+autoapi_add_toctree_entry = False
+autoapi_options = [
+    "members",
+    "show-inheritance",
+    "show-module-summary",
+    "imported-members",
+]
 numpydoc_show_class_members = False
 
 # HTML configuration

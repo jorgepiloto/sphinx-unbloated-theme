@@ -460,6 +460,65 @@ div.highlight pre > * {
 
 /* API Reference */
 
+main section[id^="module-"] > h1,
+main .autoapi-page > h1 {
+    overflow-wrap: anywhere;
+}
+
+.autoapi-summary {
+    margin: 1rem 0 2rem;
+
+    & > .autoapi-summary-panel > p.rubric {
+        font-weight: bold;
+        margin: 1rem 0 0.5rem;
+    }
+}
+
+.autoapi-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    border-bottom: 2px solid var(--black);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1rem;
+
+    & button {
+        font: inherit;
+        padding: 0.2rem 0.5rem;
+        border: var(--border);
+        box-shadow: var(--shadow);
+        background-color: var(--white);
+        color: var(--black);
+        cursor: pointer;
+
+        &[aria-selected="true"], &:hover {
+            background-color: var(--black);
+            color: var(--white);
+        }
+
+        &:focus-visible {
+            outline: 2px solid var(--black);
+            outline-offset: 3px;
+        }
+    }
+}
+
+table.autoapi-summary-table {
+    width: 100%;
+    table-layout: fixed;
+    text-align: left;
+
+    & td {
+        vertical-align: top;
+        overflow-wrap: anywhere;
+
+        & > :first-child { margin-top: 0; }
+        & > :last-child { margin-bottom: 0; }
+    }
+
+    & .pre { white-space: normal; }
+}
+
 main dl:has(> dt.sig-object) {
     margin: 2rem 0;
     border: var(--border);
