@@ -4,7 +4,7 @@ from pathlib import Path
 from urllib.parse import urlsplit
 
 
-__version__ = "1.0.dev0"
+__version__ = "1.0.0"
 """Current version of the Sphinx Unbloated Theme."""
 
 THEME_PATH = Path(__file__).parent / "theme" / "sphinx_unbloated_theme"
