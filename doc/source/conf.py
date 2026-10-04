@@ -60,7 +60,9 @@ numpydoc_show_class_members = False
 html_theme = "sphinx_unbloated_theme"
 html_title = "Sphinx Unbloated Theme"
 html_short_title = "Sphinx Unbloated Theme"
-html_baseurl = "https://jorgemartinez.space/projects/sphinx-unbloated-theme/version/stable/"
+html_baseurl = (
+    "https://jorgemartinez.space/projects/sphinx-unbloated-theme/version/stable/"
+)
 
 html_theme_options = {
     "site_description": "A Sphinx theme with monospace text and black and white headers.",
@@ -183,7 +185,9 @@ def copy_examples_files_to_source_dir(app: sphinx.application.Sphinx, config):
         destination_file.write_text(file.read_text(encoding="utf-8"), encoding="utf-8")
 
 
-def remove_examples_from_source_dir(app: sphinx.application.Sphinx, exception: Exception):
+def remove_examples_from_source_dir(
+    app: sphinx.application.Sphinx, exception: Exception
+):
     """
     Remove copied examples from the documentation source directory.
 

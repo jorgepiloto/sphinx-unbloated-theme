@@ -66,6 +66,7 @@ Code block:
        """Return a friendly greeting."""
        return f"Hello, {name}!"
 
+
    print(greet("world"))
 
 Admonitions

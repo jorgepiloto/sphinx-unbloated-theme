@@ -43,11 +43,13 @@ def _build_subnav(app, pagename, docnames):
         title_node = app.env.titles.get(doc)
         if title_node is None:
             continue
-        links.append((
-            title_node.astext(),
-            app.builder.get_relative_uri(pagename, doc),
-            pagename == doc or pagename.startswith(doc + "/"),
-        ))
+        links.append(
+            (
+                title_node.astext(),
+                app.builder.get_relative_uri(pagename, doc),
+                pagename == doc or pagename.startswith(doc + "/"),
+            )
+        )
     return links
 
 
@@ -81,21 +83,25 @@ def _add_nav_context(app, pagename, templatename, context, doctree):
     page_section = pagename.split("/")[0]
 
     # Keep the same navigation links on every page.
-    nav_links = [("Home", app.builder.get_relative_uri(pagename, master), pagename == master)]
+    nav_links = [
+        ("Home", app.builder.get_relative_uri(pagename, master), pagename == master)
+    ]
     for doc in top_level_docs:
         title_node = app.env.titles.get(doc)
         if title_node is None:
             continue
         is_active = (doc.split("/")[0] == page_section) and (pagename != master)
-        nav_links.append((
-            title_node.astext(),
-            app.builder.get_relative_uri(pagename, doc),
-            is_active,
-        ))
+        nav_links.append(
+            (
+                title_node.astext(),
+                app.builder.get_relative_uri(pagename, doc),
+                is_active,
+            )
+        )
     context["nav_links"] = nav_links
 
-    breadcrumb_levels = []   # Rendered before the page body.
-    subnav_links = []        # Moved after the first h1 by JavaScript.
+    breadcrumb_levels = []  # Rendered before the page body.
+    subnav_links = []  # Moved after the first h1 by JavaScript.
 
     if pagename == master:
         context["breadcrumb_levels"] = breadcrumb_levels
@@ -120,11 +126,15 @@ def _add_nav_context(app, pagename, templatename, context, doctree):
     else:
         # On a descendant page, show the section and its children above the body.
         section_title_node = app.env.titles.get(section_doc)
-        breadcrumb_levels.append({
-            "title": section_title_node.astext() if section_title_node else section_doc,
-            "url": app.builder.get_relative_uri(pagename, section_doc),
-            "subnav": _build_subnav(app, pagename, section_children),
-        })
+        breadcrumb_levels.append(
+            {
+                "title": section_title_node.astext()
+                if section_title_node
+                else section_doc,
+                "url": app.builder.get_relative_uri(pagename, section_doc),
+                "subnav": _build_subnav(app, pagename, section_children),
+            }
+        )
 
         # Show the current page's children after its title, if any.
         current_children = toctree_includes.get(pagename, [])

@@ -45,7 +45,9 @@ y = rng.uniform(-1, 1, N)
 inside = x**2 + y**2 <= 1.0
 
 pi_estimate = 4 * inside.sum() / N
-print(f"π estimate after {N:,} samples: {pi_estimate:.6f}  (error: {abs(pi_estimate - np.pi):.2e})")
+print(
+    f"π estimate after {N:,} samples: {pi_estimate:.6f}  (error: {abs(pi_estimate - np.pi):.2e})"
+)
 
 # ## Convergence of the Estimate
 #
@@ -68,10 +70,22 @@ fig, (ax_scatter, ax_conv) = plt.subplots(1, 2, figsize=(12, 5))
 fig.suptitle("Monte Carlo estimation of π", fontsize=14, fontweight="bold")
 # Use the first 5,000 points to keep the scatter plot readable.
 n_scatter = 5_000
-ax_scatter.scatter(x[:n_scatter][inside[:n_scatter]], y[:n_scatter][inside[:n_scatter]],
-                   s=0.8, color="tab:blue", alpha=0.5, label="Inside circle")
-ax_scatter.scatter(x[:n_scatter][~inside[:n_scatter]], y[:n_scatter][~inside[:n_scatter]],
-                   s=0.8, color="tab:red", alpha=0.5, label="Outside circle")
+ax_scatter.scatter(
+    x[:n_scatter][inside[:n_scatter]],
+    y[:n_scatter][inside[:n_scatter]],
+    s=0.8,
+    color="tab:blue",
+    alpha=0.5,
+    label="Inside circle",
+)
+ax_scatter.scatter(
+    x[:n_scatter][~inside[:n_scatter]],
+    y[:n_scatter][~inside[:n_scatter]],
+    s=0.8,
+    color="tab:red",
+    alpha=0.5,
+    label="Outside circle",
+)
 theta = np.linspace(0, 2 * np.pi, 300)
 ax_scatter.plot(np.cos(theta), np.sin(theta), color="black", linewidth=1.2)
 ax_scatter.set_aspect("equal")
@@ -81,8 +95,9 @@ ax_scatter.set_ylabel("y")
 ax_scatter.legend(loc="lower right", markerscale=6, fontsize=8)
 ax_scatter.grid(True, linestyle="--", alpha=0.4)
 # Plot the running estimate against the number of samples.
-ax_conv.semilogx(sample_counts, running_pi, color="tab:blue", linewidth=1.2,
-                 label="Running estimate")
+ax_conv.semilogx(
+    sample_counts, running_pi, color="tab:blue", linewidth=1.2, label="Running estimate"
+)
 ax_conv.axhline(np.pi, color="black", linewidth=1.0, linestyle="--", label="True π")
 ax_conv.set_title("Convergence of π estimate")
 ax_conv.set_xlabel("Number of samples")

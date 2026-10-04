@@ -1,52 +1,36 @@
 [build-system]
-requires = ["hatchling"]
 build-backend = "hatchling.build"
-
-[tool.hatch.version]
-path = "src/sphinx_unbloated_theme/__init__.py"
-pattern = '__version__ = "(?P<version>[^"]+)"'
-
-[tool.hatch.build.targets.wheel]
-packages = ["src/sphinx_unbloated_theme"]
-
-[tool.hatch.build.targets.sdist]
-include = [
-    "src/",
-    "AUTHORS",
-    "CHANGELOG.md",
-    "CODE_OF_CONDUCT.md",
-    "CONTRIBUTING.md",
-    "CONTRIBUTORS.md",
-    "LICENSE",
-    "README.rst",
-    "SECURITY.md",
-    "doc/source/changelog.rst",
-    "doc/source/_static/screenshots/",
-    "pyproject.toml",
-]
+requires = [ "hatchling" ]
 
 [project]
 name = "sphinx-unbloated-theme"
-dynamic = ["version"]
 description = "A minimal, clean Sphinx theme with a monospace aesthetic."
 readme = "README.rst"
-requires-python = ">=3.12"
-license = {file = "LICENSE"}
+license = { file = "LICENSE" }
 authors = [
-    {name = "Jorge Martinez", email = "contact@jorgemartinez.space"},
+  { name = "Jorge Martinez", email = "contact@jorgemartinez.space" },
 ]
+requires-python = ">=3.12"
 classifiers = [
-    "Development Status :: 4 - Beta",
-    "Framework :: Sphinx",
-    "Framework :: Sphinx :: Theme",
-    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
+  "Development Status :: 4 - Beta",
+  "Framework :: Sphinx",
+  "Framework :: Sphinx :: Theme",
+  "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
 ]
+dynamic = [ "version" ]
 dependencies = [
-    "Sphinx>=9.0",
+  "sphinx>=9.0",
 ]
+
+urls.Documentation = "https://jorgemartinez.space/projects/sphinx-unbloated-theme/version/stable/"
+urls.Source = "https://github.com/jorgemartinez/sphinx-unbloated-theme"
+urls.Tracker = "https://github.com/jorgemartinez/sphinx-unbloated-theme/issues"
+entry-points."sphinx.html_themes".sphinx_unbloated_theme = "sphinx_unbloated_theme"
 
 [dependency-groups]
 doc = [
@@ -62,13 +46,28 @@ doc = [
   "sphinx-copybutton==0.5.2",
 ]
 
-[project.entry-points."sphinx.html_themes"]
-sphinx_unbloated_theme = "sphinx_unbloated_theme"
+[tool.hatch.version]
+path = "src/sphinx_unbloated_theme/__init__.py"
+pattern = '__version__ = "(?P<version>[^"]+)"'
 
-[project.urls]
-Source = "https://github.com/jorgemartinez/sphinx-unbloated-theme"
-Documentation = "https://jorgemartinez.space/projects/sphinx-unbloated-theme/version/stable/"
-Tracker = "https://github.com/jorgemartinez/sphinx-unbloated-theme/issues"
+[tool.hatch.build.targets.wheel]
+packages = [ "src/sphinx_unbloated_theme" ]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "src/",
+  "AUTHORS",
+  "CHANGELOG.md",
+  "CODE_OF_CONDUCT.md",
+  "CONTRIBUTING.md",
+  "CONTRIBUTORS.md",
+  "LICENSE",
+  "README.rst",
+  "SECURITY.md",
+  "doc/source/changelog.rst",
+  "doc/source/_static/screenshots/",
+  "pyproject.toml",
+]
 
 [tool.towncrier]
 directory = "doc/source/changelog"

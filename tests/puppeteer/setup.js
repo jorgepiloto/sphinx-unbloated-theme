@@ -25,7 +25,7 @@ module.exports = async function setup() {
   const server = spawn(
     "python3",
     ["-m", "http.server", String(PORT), "--directory", DOCS_DIR],
-    { stdio: "ignore", detached: false }
+    { stdio: "ignore", detached: false },
   );
   fs.writeFileSync(PID_FILE, String(server.pid));
   await waitForServer(`http://localhost:${PORT}`);

@@ -26,14 +26,14 @@ describe("Layout", () => {
 
   test("body has 1rem top margin", async () => {
     const marginTop = await page.evaluate(
-      () => window.getComputedStyle(document.body).marginTop
+      () => window.getComputedStyle(document.body).marginTop,
     );
     expect(marginTop).toBe("17px");
   });
 
   test("body has 1rem bottom margin", async () => {
     const marginBottom = await page.evaluate(
-      () => window.getComputedStyle(document.body).marginBottom
+      () => window.getComputedStyle(document.body).marginBottom,
     );
     expect(marginBottom).toBe("17px");
   });

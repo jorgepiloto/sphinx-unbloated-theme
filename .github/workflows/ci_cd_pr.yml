@@ -18,13 +18,12 @@ jobs:
   labeler:
     name: Labels
     if: >-
-      !contains(github.event.pull_request.labels.*.name, 'ci:skip') &&
-      github.event.pull_request.head.repo.full_name == github.repository &&
-      github.actor != 'dependabot[bot]'
+      !contains(github.event.pull_request.labels.*.name, 'ci:skip') && github.event.pull_request.head.repo.full_name
+      == github.repository && github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: write
+      pull-requests: write # Apply labels to pull requests.
     steps:
       - name: Label Pull Request
         uses: actions/labeler@bf12e9b00b37c5c0ca2b87b79b2daf7891dbda13 # v7.0.0
@@ -35,8 +34,8 @@ jobs:
   actions-style:
     name: Actions Style Checks
     if: >-
-      !contains(github.event.pull_request.labels.*.name, 'ci:skip') &&
-      !contains(github.event.pull_request.labels.*.name, 'style:skip')
+      !contains(github.event.pull_request.labels.*.name, 'ci:skip') && !contains(github.event.pull_request.labels.*.name,
+      'style:skip')
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -54,8 +53,8 @@ jobs:
   code-style:
     name: Code Style Checks
     if: >-
-      !contains(github.event.pull_request.labels.*.name, 'ci:skip') &&
-      !contains(github.event.pull_request.labels.*.name, 'style:skip')
+      !contains(github.event.pull_request.labels.*.name, 'ci:skip') && !contains(github.event.pull_request.labels.*.name,
+      'style:skip')
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -111,8 +110,8 @@ jobs:
   doc-build:
     name: Doc Build
     if: >-
-      !contains(github.event.pull_request.labels.*.name, 'ci:skip') &&
-      !contains(github.event.pull_request.labels.*.name, 'docs:skip')
+      !contains(github.event.pull_request.labels.*.name, 'ci:skip') && !contains(github.event.pull_request.labels.*.name,
+      'docs:skip')
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -197,11 +196,9 @@ jobs:
     name: Build Library
     needs: [actions-style, code-style, build-wheelhouse, doc-build, tests]
     if: >-
-      always() && !cancelled() &&
-      !contains(github.event.pull_request.labels.*.name, 'ci:skip') &&
-      !contains(needs.*.result, 'failure') &&
-      needs.build-wheelhouse.result == 'success' &&
-      needs.doc-build.result == 'success'
+      always() && !cancelled() && !contains(github.event.pull_request.labels.*.name,
+      'ci:skip') && !contains(needs.*.result, 'failure') && needs.build-wheelhouse.result
+      == 'success' && needs.doc-build.result == 'success'
     runs-on: ubuntu-latest
     permissions:
       contents: read

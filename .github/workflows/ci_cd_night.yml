@@ -151,13 +151,12 @@ jobs:
           npx playwright install --with-deps chromium firefox
           npm test
 
-
   doc-deploy-dev:
     name: Deploy Dev Docs
     needs: doc-build
     if: >-
-      github.ref == 'refs/heads/main' &&
-      (github.event_name != 'workflow_dispatch' || inputs.run-doc)
+      github.ref == 'refs/heads/main' && (github.event_name != 'workflow_dispatch'
+      || inputs.run-doc)
     runs-on: ubuntu-latest
     permissions:
       contents: read

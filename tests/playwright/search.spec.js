@@ -10,7 +10,9 @@ test.describe("Search page", () => {
 
   test("no search form is rendered in the page body", async ({ page }) => {
     await page.goto("/search.html");
-    await expect(page.locator("main form, #search-documentation ~ form")).toHaveCount(0);
+    await expect(
+      page.locator("main form, #search-documentation ~ form"),
+    ).toHaveCount(0);
   });
 
   test("search results container is present", async ({ page }) => {

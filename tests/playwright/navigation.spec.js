@@ -12,7 +12,7 @@ test.describe("Navigation", () => {
     await page.goto("/index.html");
     await expect(page.locator("header form.header-search")).toBeVisible();
     await expect(
-      page.locator("header form.header-search input[type='search']")
+      page.locator("header form.header-search input[type='search']"),
     ).toBeVisible();
   });
 

@@ -27,9 +27,8 @@ describe("Search page", () => {
   });
 
   test("h1 reads 'Search results'", async () => {
-    const text = await page.$eval(
-      "h1#search-documentation",
-      (el) => el.textContent.trim()
+    const text = await page.$eval("h1#search-documentation", (el) =>
+      el.textContent.trim(),
     );
     expect(text).toBe("Search results");
   });
@@ -49,7 +48,7 @@ describe("Search page", () => {
     if (h2) {
       const display = await page.evaluate(
         (el) => window.getComputedStyle(el).display,
-        h2
+        h2,
       );
       expect(display).toBe("none");
     }
