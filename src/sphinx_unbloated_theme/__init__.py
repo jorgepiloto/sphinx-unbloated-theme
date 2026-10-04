@@ -3,7 +3,7 @@
 from pathlib import Path
 
 
-__version__ = "0.1.dev0"
+__version__ = "1.0.dev0"
 """Current version of the Sphinx Unbloated Theme."""
 
 THEME_PATH = Path(__file__).parent / "theme" / "sphinx_unbloated_theme"
