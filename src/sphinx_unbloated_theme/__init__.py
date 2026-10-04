@@ -10,7 +10,23 @@ THEME_PATH = Path(__file__).parent / "theme" / "sphinx_unbloated_theme"
 
 
 def _build_subnav(app, pagename, docnames):
-    """Return a list of (label, url, is_active) for *docnames* relative to *pagename*."""
+    """Build navigation links relative to the current page.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        Sphinx application for the documentation build.
+    pagename : str
+        Document name of the current page.
+    docnames : sequence of str
+        Document names to include in the navigation.
+
+    Returns
+    -------
+    list of tuple
+        Links as ``(label, url, is_active)`` tuples. Documents without a
+        title are skipped.
+    """
     links = []
     for doc in docnames:
         title_node = app.env.titles.get(doc)
@@ -27,6 +43,21 @@ def _build_subnav(app, pagename, docnames):
 def _add_nav_context(app, pagename, templatename, context, doctree):
     """Add navigation links to the page template context.
 
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        Sphinx application for the documentation build.
+    pagename : str
+        Document name of the current page.
+    templatename : str
+        Page template name. Unused, but required by the event signature.
+    context : dict
+        Template context to update with navigation links.
+    doctree : docutils.nodes.document or None
+        Page document tree. Unused, but required by the event signature.
+
+    Notes
+    -----
     ``nav_links`` contains Home and the top-level sections.
     ``breadcrumb_levels`` contains the top-level section's title, URL, and
     child links, rendered before the page body as ``{title, url, subnav}``.
@@ -93,7 +124,18 @@ def _add_nav_context(app, pagename, templatename, context, doctree):
 
 
 def setup(app):
-    """Register the theme with Sphinx."""
+    """Register the theme and navigation hook with Sphinx.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        Sphinx application for the documentation build.
+
+    Returns
+    -------
+    dict
+        Extension metadata with the version and parallel build safety flags.
+    """
     app.add_html_theme("sphinx_unbloated_theme", THEME_PATH)
     app.connect("html-page-context", _add_nav_context)
     return {
@@ -101,3 +143,21 @@ def setup(app):
         "parallel_read_safe": True,
         "parallel_write_safe": True,
     }
+
+
+def add_two_numbers(a: int, b: int) -> int:
+    """Add two numbers.
+
+    Parameters
+    ----------
+    a : int
+        First number.
+    b : int
+        Second number.
+
+    Returns
+    -------
+    int
+        Sum of the two numbers.
+    """
+    return a + b

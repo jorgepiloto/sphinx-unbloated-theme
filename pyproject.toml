@@ -44,6 +44,7 @@ doc = [
   "myst-parser==5.1.0",
   "nbconvert==7.17.1",
   "nbsphinx==0.9.8",
+  "numpydoc==1.11.0",
   "plotly==6.7.0",
   "sphinx-copybutton==0.5.2",
 ]

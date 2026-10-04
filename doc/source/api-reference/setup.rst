@@ -1,11 +1,11 @@
 .. _api-setup:
 
-``sphinx_unbloated_theme``
-##########################
+Theme Setup
+###########
 
-The public Python API of the theme is intentionally small. The package exposes
-a single ``setup()`` function that Sphinx calls automatically when
-``html_theme = "sphinx_unbloated_theme"`` is set in ``conf.py``.
+Set ``html_theme = "sphinx_unbloated_theme"`` in ``conf.py``. Sphinx then calls
+``sphinx_unbloated_theme.setup(app)`` to register the theme and its navigation
+hook.
 
 .. automodule:: sphinx_unbloated_theme
    :members:

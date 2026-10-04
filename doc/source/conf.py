@@ -31,6 +31,7 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.mathjax",
     "sphinx.ext.viewcode",
+    "numpydoc",
     "sphinx_copybutton",
     "nbsphinx",
     "myst_parser",
@@ -48,6 +49,7 @@ autodoc_default_options = {
     "undoc-members": False,
     "show-inheritance": True,
 }
+numpydoc_show_class_members = False
 
 # HTML configuration
 html_theme = "sphinx_unbloated_theme"
@@ -125,7 +127,7 @@ def copy_examples_to_output_dir(app: sphinx.application.Sphinx, exception: Excep
     ----------
     app : sphinx.application.Sphinx
         Sphinx application for this build.
-    exception : Exception
+    exception : Exception or None
         Build exception, or None if the build succeeded. Unused by this hook.
 
     """
@@ -184,7 +186,7 @@ def remove_examples_from_source_dir(app: sphinx.application.Sphinx, exception: E
     ----------
     app : sphinx.application.Sphinx
         Sphinx application for this build.
-    exception : Exception
+    exception : Exception or None
         Build exception, or None if the build succeeded. Unused by this hook.
 
     """
@@ -205,7 +207,7 @@ def render_examples_as_pdf(app: sphinx.application.Sphinx, exception: Exception)
     ----------
     app : sphinx.application.Sphinx
         Sphinx application for this build.
-    exception : Exception
+    exception : Exception or None
         Build exception, or None if the build succeeded. Unused by this hook.
 
     """

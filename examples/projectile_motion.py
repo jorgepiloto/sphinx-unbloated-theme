@@ -26,6 +26,20 @@ m   = 0.145     # projectile mass, kg
 # ``ax = -(b/m)*v*vx`` and ``ay = -g - (b/m)*v*vy``.
 
 def derivatives(state):
+    """Compute velocity and acceleration under gravity and quadratic drag.
+
+    Parameters
+    ----------
+    state : ndarray of shape (4,)
+        Horizontal and vertical positions in meters, followed by the
+        corresponding velocities in meters per second.
+
+    Returns
+    -------
+    ndarray of shape (4,)
+        Horizontal and vertical velocities, followed by the corresponding
+        accelerations in meters per second squared.
+    """
     x, y, vx, vy = state
     v  = np.sqrt(vx**2 + vy**2)
     ax = -(b / m) * v * vx
@@ -34,6 +48,21 @@ def derivatives(state):
 
 
 def rk4_step(state, dt):
+    """Advance the projectile state with a fourth-order Runge-Kutta step.
+
+    Parameters
+    ----------
+    state : ndarray of shape (4,)
+        Horizontal and vertical positions in meters, followed by the
+        corresponding velocities in meters per second.
+    dt : float
+        Time step in seconds.
+
+    Returns
+    -------
+    ndarray of shape (4,)
+        Projectile state after one time step.
+    """
     k1 = derivatives(state)
     k2 = derivatives(state + 0.5 * dt * k1)
     k3 = derivatives(state + 0.5 * dt * k2)
@@ -42,7 +71,23 @@ def rk4_step(state, dt):
 
 
 def simulate(angle_deg, dt=0.01):
-    """Simulate until the projectile falls below ground level after launch."""
+    """Simulate until the projectile falls below ground level after launch.
+
+    Parameters
+    ----------
+    angle_deg : float
+        Launch angle in degrees above the horizontal.
+    dt : float, optional
+        Time step in seconds. Default is 0.01.
+
+    Returns
+    -------
+    xs : ndarray
+        Horizontal positions in meters, including the first point below
+        ground level.
+    ys : ndarray
+        Vertical positions in meters at the same time steps.
+    """
     theta = np.radians(angle_deg)
     state = np.array([0.0, 0.0, v0 * np.cos(theta), v0 * np.sin(theta)])
     xs, ys = [state[0]], [state[1]]
@@ -63,6 +108,22 @@ trajectories = {a: simulate(a) for a in angles}
 
 # Compare with parabolic trajectories in a vacuum (b = 0).
 def simulate_vacuum(angle_deg, dt=0.01):
+    """Compute the projectile trajectory without air drag.
+
+    Parameters
+    ----------
+    angle_deg : float
+        Launch angle in degrees above the horizontal.
+    dt : float, optional
+        Unused. The trajectory uses 500 equally spaced time samples.
+
+    Returns
+    -------
+    xs : ndarray
+        Horizontal positions in meters from launch to landing.
+    ys : ndarray
+        Vertical positions in meters at the same time samples.
+    """
     theta = np.radians(angle_deg)
     vx0, vy0 = v0 * np.cos(theta), v0 * np.sin(theta)
     t_flight = 2 * vy0 / g
