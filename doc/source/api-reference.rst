@@ -8,4 +8,3 @@ API Reference
    :maxdepth: 2
 
    api-reference/setup
-   api-reference/theme-options
