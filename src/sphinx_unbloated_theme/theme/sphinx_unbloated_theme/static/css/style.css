@@ -30,11 +30,13 @@
 
 /* Responsive Breakpoint */
 
-/* Switch between mobile and desktop layouts at 500px. */
+/* Use the website's mobile sizes at widths up to 500px. */
 
 /* Design Tokens */
 
 :root {
+    font-size: 11px;
+
     /* Colors */
     --white: #ffffff;
     --lightgray: #ededed;
@@ -50,11 +52,11 @@
 
     /* Headings */
     --h1-font-size: 2.00rem;
-    --h2-font-size: 1.50rem;
-    --h3-font-size: 1.30rem;
-    --h4-font-size: 1.17rem;
-    --h5-font-size: 1.10rem;
-    --h6-font-size: 1.00rem;
+    --h2-font-size: 1.30rem;
+    --h3-font-size: 1.15rem;
+    --h4-font-size: 1.05rem;
+    --h5-font-size: 1.00rem;
+    --h6-font-size: 0.95rem;
 
     /* Borders and shadows */
     --shadow: 2px 2px var(--darkgray);
@@ -63,7 +65,7 @@
 
 /* Responsive Design */
 
-@media (min-width: 500px) {
+@media (min-width: 501px) {
     :root { font-size: 17px; }
     body  { margin: 1rem auto; }
 }
@@ -278,6 +280,12 @@ main {
     padding: 0 2.5rem;
 }
 
+/* Keep heading underlines within the page content. */
+main > section {
+    overflow-x: clip;
+    container-type: inline-size;
+}
+
 /* Typography */
 
 /* Apply heading styles to page content. */
@@ -290,6 +298,32 @@ main {
     & h4 { font-size: var(--h4-font-size); }
     & h5 { font-size: var(--h5-font-size); }
     & h6 { font-size: var(--h6-font-size); }
+}
+
+main :is(h2, h3, h4, h5, h6),
+main div.toctree-wrapper p.caption {
+    display: inline-block;
+    position: relative;
+    max-width: 100%;
+    box-sizing: border-box;
+    background-color: var(--black);
+    color: var(--white);
+    padding: 0.1rem 0.5rem;
+    margin-right: 0.5rem;
+
+    & a, & code, & tt {
+        color: inherit;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100cqw;
+        height: 2px;
+        background-color: var(--black);
+    }
 }
 
 /* Anchor Links */
