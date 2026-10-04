@@ -28,6 +28,16 @@ The theme is intentionally small: a single well-organised CSS file, a Jinja2
 layout template, and a handful of configuration options. It is designed to be
 easy to read, easy to override, and fast to load.
 
+Screenshots
+===========
+
+Home page, user guide, and API reference, from left to right.
+
+.. image:: doc/source/_static/screenshots/theme-preview.png
+   :alt: Three theme screenshots showing the home page, user guide, and API reference.
+   :width: 100%
+   :align: center
+
 Installation
 ============
 

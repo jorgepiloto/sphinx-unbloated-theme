@@ -21,6 +21,7 @@ include = [
     "README.rst",
     "SECURITY.md",
     "doc/source/changelog.rst",
+    "doc/source/_static/screenshots/",
     "pyproject.toml",
 ]
 
